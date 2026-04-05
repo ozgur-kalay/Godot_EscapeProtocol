@@ -1,0 +1,57 @@
+[gd_scene load_steps=4 format=3 uid="uid://sosd73skajrj"]
+
+[ext_resource type="PackedScene" uid="uid://lfuh1u2osxsk" path="res://Scenes/Menus/BaseMenu/BaseMenu.tscn" id="1_6qjt5"]
+[ext_resource type="Script" uid="uid://bkvo73vusqok2" path="res://Scenes/Menus/LevelGameOverMenu/game_over_menu_controls.gd" id="2_vdicv"]
+[ext_resource type="PackedScene" uid="uid://bj54vyuhc7bbs" path="res://Scenes/Menus/SceneMenuButton/scene_menu_button.tscn" id="3_bc8hs"]
+
+[node name="LevelGameOverMenu" instance=ExtResource("1_6qjt5")]
+
+[node name="MenuControls" parent="." index="0"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_vdicv")
+
+[node name="CenterContainer" type="CenterContainer" parent="MenuControls" index="0"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="MenuControls/CenterContainer" index="0"]
+layout_mode = 2
+color = Color(0.426866, 0, 0.0174855, 0.0980392)
+
+[node name="CenterContainer2" type="CenterContainer" parent="MenuControls" index="1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 160.0
+offset_bottom = 60.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuControls/CenterContainer2" index="0"]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+theme_override_constants/separation = 30
+alignment = 1
+
+[node name="RestartButton" parent="MenuControls/CenterContainer2/VBoxContainer" index="0" instance=ExtResource("3_bc8hs")]
+layout_mode = 2
+text = "Restart"
+
+[node name="ExitButton" parent="MenuControls/CenterContainer2/VBoxContainer" index="1" instance=ExtResource("3_bc8hs")]
+layout_mode = 2
+text = "Exit"
+
+[connection signal="scene_menu_button_pressed" from="MenuControls/CenterContainer2/VBoxContainer/RestartButton" to="MenuControls" method="_on_restart_button_scene_menu_button_pressed"]
+[connection signal="scene_menu_button_pressed" from="MenuControls/CenterContainer2/VBoxContainer/ExitButton" to="MenuControls" method="_on_exit_button_scene_menu_button_pressed"]

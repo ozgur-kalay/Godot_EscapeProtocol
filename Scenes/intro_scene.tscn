@@ -1,0 +1,45 @@
+[gd_scene load_steps=3 format=3 uid="uid://dnisb34lqm33l"]
+
+[ext_resource type="PackedScene" uid="uid://dtv48kxoirsqt" path="res://Scenes/BaseScene/Base_scene.tscn" id="1_d30j0"]
+[ext_resource type="PackedScene" uid="uid://beibi1vllxd33" path="res://Scenes/effects/ScreenFade.tscn" id="2_bbocs"]
+
+[node name="IntroScene" node_paths=PackedStringArray("signal_client") instance=ExtResource("1_d30j0")]
+song_name = &"DarkAtmosphereToSynth"
+signal_client = NodePath("ScreenFadeOut")
+signal_name = &"finished"
+
+[node name="ColorRect" type="ColorRect" parent="." index="0"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." index="1"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Label2" type="Label" parent="VBoxContainer" index="0"]
+layout_mode = 2
+text = "Developed 
+by 
+Ozgur Kalay"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScreenFadeIn" parent="." index="2" instance=ExtResource("2_bbocs")]
+fade_duration = 2.0
+auto_start = true
+auto_start_delay = 2.0
+
+[node name="ScreenFadeOut" parent="." index="3" node_paths=PackedStringArray("signal_client") instance=ExtResource("2_bbocs")]
+mode = "FadeOut"
+fade_duration = 2.0
+signal_client = NodePath("../ScreenFadeIn")
+signal_name = &"finished"
+on_signal_delay = 1.0

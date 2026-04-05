@@ -1,0 +1,223 @@
+[gd_scene load_steps=23 format=4 uid="uid://c0yu5fsydh3ik"]
+
+[ext_resource type="PackedScene" uid="uid://dtv48kxoirsqt" path="res://Scenes/BaseScene/Base_scene.tscn" id="1_21ecp"]
+[ext_resource type="TileSet" uid="uid://ul57s4trmepa" path="res://TileSets/metalic_walls_set.tres" id="2_6npqa"]
+[ext_resource type="TileSet" uid="uid://bnhlq8ychokbt" path="res://TileSets/floor_tiles.tres" id="2_boelf"]
+[ext_resource type="Texture2D" uid="uid://vh7gj4xmidtl" path="res://Assets/Aseprite/TileSet/Png/pipes_set.png" id="3_7r5d1"]
+[ext_resource type="PackedScene" uid="uid://bkqaslclk8enh" path="res://PlayContent/Entities/Player/player.tscn" id="3_ch276"]
+[ext_resource type="PackedScene" uid="uid://bulp87ts8se4m" path="res://PlayContent/Props/Lamps/BulkHeadLampSmall/BulkHeadLampSmall.tscn" id="4_7r5d1"]
+[ext_resource type="PackedScene" uid="uid://d2lddkaps273j" path="res://PlayContent/Interactables/LevelFinish/level_finish.tscn" id="5_o7uoy"]
+[ext_resource type="PackedScene" uid="uid://sosd73skajrj" path="res://Scenes/Menus/LevelGameOverMenu/level_game_over_menu.tscn" id="6_i11l1"]
+[ext_resource type="PackedScene" uid="uid://ciyv5i4tg5sno" path="res://Scenes/Menus/LevelFinishMenu/level_finished_menu.tscn" id="7_1sfm5"]
+[ext_resource type="PackedScene" uid="uid://c8q1dglunxrl2" path="res://Scenes/Menus/LevelGameCompletedMenu/game_completed_menu.tscn" id="8_6lis1"]
+[ext_resource type="PackedScene" uid="uid://br16a7c1dio2f" path="res://PlayContent/Interactables/DragableBox/dragable_box.tscn" id="8_i11l1"]
+[ext_resource type="PackedScene" uid="uid://daer0ft6je62h" path="res://PlayContent/Interactables/CheckPoint/CheckPoint.tscn" id="9_1sfm5"]
+[ext_resource type="Script" uid="uid://c37hsn57rv14" path="res://Scenes/PlayScenes/camera_2d.gd" id="9_boelf"]
+[ext_resource type="PackedScene" uid="uid://dlcshvxik04y" path="res://PlayContent/Weapons/LaserEmitters/WallLaser/wall_laser.tscn" id="9_vmu3y"]
+[ext_resource type="PackedScene" uid="uid://rvnj4sdlwouo" path="res://PlayContent/Entities/Enemies/Eye/Eye.tscn" id="11_roxbw"]
+[ext_resource type="PackedScene" uid="uid://cvd56aoj03erk" path="res://Scenes/Menus/InGameMenu/in_game_menu.tscn" id="14_6lis1"]
+[ext_resource type="PackedScene" uid="uid://bi8pnook500ep" path="res://PlayContent/Interactables/PowerDoor/PowerDoor.tscn" id="14_xabcf"]
+[ext_resource type="Script" uid="uid://ddqnobiwbq62q" path="res://Scenes/PlayScenes/post_processing.gd" id="16_4xxer"]
+[ext_resource type="Environment" uid="uid://m3aa44mkcac2" path="res://Scenes/PlayScenes/level_world_environment.tres" id="17_vmu3y"]
+[ext_resource type="PackedScene" uid="uid://3eok6aroh445" path="res://GameHUD/GameHUD.tscn" id="20_5lb36"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_boelf"]
+texture = ExtResource("3_7r5d1")
+texture_region_size = Vector2i(32, 32)
+1:0/0 = 0
+1:0/0/z_index = 4
+0:1/0 = 0
+0:1/0/z_index = 4
+2:1/0 = 0
+2:1/0/z_index = 4
+1:2/0 = 0
+1:2/0/z_index = 4
+
+[sub_resource type="TileSet" id="TileSet_5lb36"]
+tile_size = Vector2i(32, 32)
+sources/1 = SubResource("TileSetAtlasSource_boelf")
+
+[node name="LevelTwoScene" instance=ExtResource("1_21ecp")]
+song_name = &"TheProtagonist"
+
+[node name="Level" type="Node2D" parent="." index="0"]
+
+[node name="Background" type="ColorRect" parent="Level" index="0"]
+offset_left = 176.0
+offset_top = -48.0
+offset_right = 3552.0
+offset_bottom = 1280.0
+color = Color(0, 0, 0, 1)
+
+[node name="Environment" type="Node2D" parent="Level" index="1"]
+
+[node name="FloorTiles" type="TileMapLayer" parent="Level/Environment" index="0"]
+tile_map_data = PackedByteArray("AAAIAA4AAQAAAAAAAAAJAA4AAQAAAAAAAAAKAA4AAQAAAAAAAAALAA4AAQAAAAAAAAAMAA4AAQAAAAAAAAANAA4AAQAAAAAAAAAOAA4AAQAAAAAAAAAPAA4AAQAAAAAAAAAQAA4AAQAAAAAAAAARAA4AAQAAAAAAAAAMAAsAAQAAAAAAAAAMAAwAAQAAAAAAAAAMAA0AAQAAAAAAAAANAAsAAQAAAAAAAAANAAwAAQAAAAAAAAANAA0AAQAAAAAAAAAOAAsAAQAAAAAAAAAOAAwAAQAAAAAAAAAOAA0AAQAAAAAAAAAPAAsAAQAAAAAAAAAPAAwAAQAAAAAAAAAPAA0AAQAAAAAAAAAQAAsAAQAAAAAAAAAQAAwAAQAAAAAAAAAQAA0AAQAAAAAAAAARAAsAAQAAAAAAAAARAAwAAQAAAAAAAAARAA0AAQAAAAAAAAARAAYAAQAAAAAAAAARAAcAAQAAAAAAAAARAAgAAQAAAAAAAAARAAkAAQAAAAAAAAARAAoAAQAAAAAAAAASAAYAAQAAAAAAAAATAAYAAQAAAAAAAAAUAAYAAQAAAAAAAAAVAAYAAQAAAAAAAAAWAAYAAQAAAAAAAAAXAAYAAQAAAAAAAAAYAAYAAQAAAAAAAAAZAAYAAQAAAAAAAAAaAAYAAQAAAAAAAAAbAAYAAQAAAAAAAAAcAAYAAQAAAAAAAAAdAAYAAQAAAAAAAAAeAAYAAQAAAAAAAAAfAAYAAQAAAAAAAAAgAAYAAQAAAAAAAAAhAAYAAQAAAAAAAAAiAAYAAQAAAAAAAAAjAAYAAQAAAAAAAAAkAAYAAQAAAAAAAAAlAAYAAQAAAAAAAAAWAAQAAQAAAAAAAAAWAAUAAQAAAAAAAAAWAAcAAQAAAAAAAAAWAAgAAQAAAAAAAAAXAAQAAQAAAAAAAAAXAAUAAQAAAAAAAAAXAAcAAQAAAAAAAAAXAAgAAQAAAAAAAAAcAAQAAQAAAAAAAAAcAAUAAQAAAAAAAAAcAAcAAQAAAAAAAAAcAAgAAQAAAAAAAAAdAAQAAQAAAAAAAAAdAAUAAQAAAAAAAAAdAAcAAQAAAAAAAAAdAAgAAQAAAAAAAAAeAAQAAQAAAAAAAAAeAAUAAQAAAAAAAAAeAAcAAQAAAAAAAAAeAAgAAQAAAAAAAAAkAAQAAQAAAAAAAAAkAAUAAQAAAAAAAAAkAAcAAQAAAAAAAAAkAAgAAQAAAAAAAAAlAAQAAQAAAAAAAAAlAAUAAQAAAAAAAAAlAAcAAQAAAAAAAAAlAAgAAQAAAAAAAAAmAAQAAQAAAAAAAAAmAAUAAQAAAAAAAAAmAAYAAQAAAAAAAAAmAAcAAQAAAAAAAAAmAAgAAQAAAAAAAAAnAAQAAQAAAAAAAAAnAAUAAQAAAAAAAAAnAAYAAQAAAAAAAAAnAAcAAQAAAAAAAAAnAAgAAQAAAAAAAAAoAAQAAQAAAAAAAAAoAAUAAQAAAAAAAAAoAAYAAQAAAAAAAAAoAAcAAQAAAAAAAAAoAAgAAQAAAAAAAAApAAQAAQAAAAAAAAApAAUAAQAAAAAAAAApAAYAAQAAAAAAAAApAAcAAQAAAAAAAAApAAgAAQAAAAAAAAAjAAcAAQAAAAAAAAAqAAYAAQAAAAAAAAArAAYAAQAAAAAAAAAsAAYAAQAAAAAAAAAtAAYAAQAAAAAAAAAuAAYAAQAAAAAAAAAvAAYAAQAAAAAAAAAwAAYAAQAAAAAAAAAxAAYAAQAAAAAAAAAuAAUAAQAAAAAAAAAuAAcAAQAAAAAAAAAuAAgAAQAAAAAAAAAvAAUAAQAAAAAAAAAvAAcAAQAAAAAAAAAvAAgAAQAAAAAAAAAwAAUAAQAAAAAAAAAwAAcAAQAAAAAAAAAwAAgAAQAAAAAAAAAxAAUAAQAAAAAAAAAxAAcAAQAAAAAAAAAxAAgAAQAAAAAAAAASAAcAAQAAAAAAAAASAAgAAQAAAAAAAAASAAkAAQAAAAAAAAASAAoAAQAAAAAAAAASAAsAAQAAAAAAAAASAAwAAQAAAAAAAAASAA0AAQAAAAAAAAASAA4AAQAAAAAAAAA=")
+tile_set = ExtResource("2_boelf")
+
+[node name="WallTiles" type="TileMapLayer" parent="Level/Environment" index="1"]
+tile_map_data = PackedByteArray("AAAZABgAAQAaAAQAAAAZABkAAQAXAAYAAAAZABoAAQAAAAEAAAAZABsAAQAAAAUAAAAZABwAAQARAA0AAAAZAB4AAQAXAAMAAAAaABgAAQAbAAQAAAAaAB4AAQAUAA4AAAAbABYAAQAHABIAAAAbABgAAQAJAAQAAAAbABoAAQARAAgAAAAbABwAAQARAAgAAAAbAB4AAQACAAYAAAAcABgAAQACAAAAAAAcAB4AAQACAAAAAAAdABcAAQACABQAAAAdABgAAQADAAYAAAAdABoAAQASAAQAAAAdABwAAQAPABAAAAAdAB4AAQACAAAAAAAeABgAAQAEAAMAAAAeABwAAQAWAAwAAAAeAB4AAQACAAAAAAAfABgAAQACAAMAAAAfABwAAQAGAAAAAAAfAB0AAQADAAIAAAAfAB4AAQADAAYAAAAgABgAAQANABUAAAAgABoAAQAKABAAAAAgAB4AAQACAAAAAAAhABoAAQACAAMAAAAhAB4AAQACAAAAAAAiABUAAQAGAAMAAAAiABYAAQAXAA8AAAAiABcAAQADAAUAAAAiABgAAQAXAA8AAAAiABkAAQAZAAsAAAAiABoAAQAGAAMAAAAiABsAAQABABIAAAAiAB4AAQACAAAAAAAjAB4AAQAWAAwAAAAZAB0AAQAMAAcAAAAZABcAAQAXAAEAAAAeABoAAQANAAwAAAAiAA4AAQAZAAsAAAAiAA8AAQAXAAYAAAAiABAAAQAAAAIAAAAiAAwAAQAAAAAAAAAjAAwAAQATAAQAAAAQABwAAQAAAAAAAAAQAB0AAQAXAAYAAAAQAB4AAQAAAAYAAAAXABYAAQAXAA8AAAAXABcAAQADAAIAAAAXABgAAQAXAAIAAAAXABkAAQAGAAIAAAARABwAAQACAAAAAAARAB4AAQACAAAAAAASABwAAQACAAAAAAASAB4AAQACAAAAAAATABwAAQACAAAAAAATAB4AAQACAAAAAAAUABwAAQACAAAAAAAUAB4AAQACAAAAAAAVABwAAQACAAAAAAAVAB4AAQACAAAAAAAWABwAAQACAAAAAAAWAB4AAQACAAAAAAAXABUAAQAAAAAAAAAXABoAAQAXAA8AAAAXABsAAQARAA0AAAAXABwAAQAGAAYAAAAXAB4AAQACAAAAAAAYABUAAQACAAAAAAAYAB4AAQACAAAAAAAZABUAAQACAAAAAAAaABUAAQACAAAAAAAbABUAAQAXAAUAAAAcABUAAQABAAYAAAAdABUAAQACAAAAAAAeABUAAQACAAAAAAAfABUAAQABAAYAAAAgABUAAQAFAAAAAAAhABUAAQAUAA4AAAAiABQAAQAZAAsAAAAiABMAAQAAAAQAAAAiABIAAQAAAAEAAAAiABEAAQARAA0AAAAkAAwAAQACAAMAAAAiAA0AAQAZAAsAAABTAAgAAQAAAAAAABBSAAgAAQAUAA4AABBRAAgAAQACAAAAABBQAAgAAQACAAAAABBPAAgAAQACAAAAABBOAAgAAQACAAAAABBNAAgAAQACAAAAABBMAAgAAQACAAAAABBLAAgAAQACAAAAABBKAAgAAQACAAAAABBJAAgAAQACAAAAABBIAAgAAQAPAAQAABBHAAgAAQAGAAAAABA+AAgAAQAAAAAAABA9AAgAAQACAAAAABA8AAgAAQACAAAAABA7AAgAAQACAAAAABA6AAgAAQATAAQAABA5AAgAAQAJAAQAABA4AAgAAQAGAAAAABAvAAgAAQAAAAAAABAuAAgAAQACAAAAABAtAAgAAQACAAMAABAsAAgAAQAGAAAAABBTAAkAAQAZAAsAABBHAAkAAQAMAAEAABA+AAkAAQADAAIAABA4AAkAAQAMAAEAABAvAAkAAQADAAQAABAsAAkAAQAGAAUAABBTAAoAAQADAAQAABBHAAoAAQAAAAEAABA+AAoAAQAMAAcAABA4AAoAAQAXAAYAABAvAAoAAQAZAAsAABAsAAoAAQAGAAQAABBUAAsAAQAGAAAAAABTAAsAAQAAAAYAAABQAAsAAQARAAgAAABNAAsAAQARAAgAAABKAAsAAQARAAgAAABHAAsAAQAAAAYAABBGAAsAAQAGAAAAABA+AAsAAQAGAAIAABA7AAsAAQARAAgAABA4AAsAAQADAAQAABAvAAsAAQAMAAcAABAsAAsAAQAXAAYAABBUAAwAAQAAAAYAAABGAAwAAQAAAAYAABBFAAwAAQACAAAAABBEAAwAAQACAAAAABBDAAwAAQACAAAAABBCAAwAAQACAAAAABBBAAwAAQACAAAAABBAAAwAAQACAAAAABA/AAwAAQACAAAAABA+AAwAAQAGAAYAABA4AAwAAQAAAAYAABA3AAwAAQACAAAAABA2AAwAAQACAAAAABA1AAwAAQACAAAAABA0AAwAAQACAAAAABAzAAwAAQACAAAAABAyAAwAAQACAAAAABAxAAwAAQACAAAAABAwAAwAAQAEAAAAABAvAAwAAQAGAAYAABAsAAwAAQAAAAYAABArAAwAAQACAAAAABAqAAwAAQACAAAAABApAAwAAQACAAAAABAoAAwAAQACAAAAABAnAAwAAQACAAAAABAmAAwAAQABAAAAAAAlAAwAAQACAAMAAABQAA0AAQARAAgAAABNAA0AAQARAAgAAABKAA0AAQARAAgAAAA7AA0AAQARAAgAABBUAA4AAQAAAAAAAABGAA4AAQAAAAAAABBFAA4AAQACAAAAABBEAA4AAQACAAAAABBDAA4AAQACAAAAABBCAA4AAQACAAAAABBBAA4AAQACAAAAABBAAA4AAQACAAAAABA/AA4AAQACAAAAABA+AA4AAQAGAAAAABA4AA4AAQAAAAAAABA3AA4AAQACAAAAABA2AA4AAQACAAAAABA1AA4AAQACAAAAABA0AA4AAQACAAAAABAzAA4AAQACAAAAABAyAA4AAQACAAAAABAxAA4AAQACAAAAABAwAA4AAQAPAAQAABAvAA4AAQAGAAAAABAsAA4AAQAAAAAAABArAA4AAQACAAAAABAqAA4AAQACAAAAABApAA4AAQACAAAAABAoAA4AAQACAAAAABAnAA4AAQACAAAAABAmAA4AAQAFAAMAAAAlAA4AAQAAAAAAAABUAA8AAQAGAAYAAABTAA8AAQAAAAAAAABQAA8AAQARAAgAAABNAA8AAQARAAgAAABKAA8AAQARAAgAAABHAA8AAQAAAAAAABBGAA8AAQAGAAYAABA+AA8AAQAGAAUAABA7AA8AAQARAAgAABA4AA8AAQAMAAEAABAvAA8AAQATABEAABAsAA8AAQAGAAEAABBTABAAAQADAAQAABBHABAAAQADAAIAABA+ABAAAQADAAEAABA4ABAAAQAAAAIAABAvABAAAQADAAEAABAsABAAAQADAAQAABBTABEAAQAGAAIAABBHABEAAQAXAAYAABA+ABEAAQAXAAYAABA4ABEAAQAGAAQAABAvABEAAQARAA0AABAsABEAAQADAAIAABBTABIAAQAAAAYAABBSABIAAQACAAYAABBRABIAAQACAAAAABBQABIAAQACAAAAABBPABIAAQACAAAAABBOABIAAQACAAAAABBNABIAAQACAAAAABBMABIAAQACAAAAABBLABIAAQACAAAAABBKABIAAQACAAAAABBJABIAAQACAAAAABBIABIAAQABAAMAABBHABIAAQAGAAYAABA+ABIAAQAAAAYAABA9ABIAAQABAAMAABA8ABIAAQACAAAAABA7ABIAAQACAAAAABA6ABIAAQACAAAAABA5ABIAAQAFAAAAABA4ABIAAQAGAAYAABAvABIAAQAAAAYAABAuABIAAQAQABAAABAtABIAAQAEAAMAABAsABIAAQAGAAYAABBYAAwAAQABAAAAAABYAA4AAQAEAAAAAABZAAwAAQACAAAAABBZAA4AAQACAAAAABBaAAwAAQACAAAAABBaAA4AAQACAAAAABBbAAkAAQAAAAAAAABbAAoAAQAMAAcAAABbAAsAAQAAAAUAAABbAAwAAQAGAAYAAABbAA4AAQAGAAAAAABbAA8AAQADAAIAAABbABAAAQAAAAUAAABbABEAAQAAAAYAAABcAAkAAQAWAAwAAABcABEAAQACAAYAAABdAAkAAQAEAAYAAABdABEAAQACAAMAAABeAAkAAQAEAAAAAABeABEAAQAWAAwAAABfAAkAAQAEAAAAAABfABEAAQAEAAAAAABgAAkAAQAbAAQAAABgABEAAQAFAAMAAABhAAkAAQAQABAAAABhABEAAQATAAQAAABiAAkAAQAFAAMAAABiABEAAQACAAYAAABjAAkAAQAGAAAAAABjAAoAAQADAAEAAABjAAsAAQAMAAcAAABjAAwAAQAGAAIAAABjAA0AAQAAAAUAAABjAA4AAQAMAAEAAABjAA8AAQADAAEAAABjABAAAQAMAAcAAABjABEAAQAGAAYAAABXAAwAAQAFAAMAAABWAAwAAQATAAQAAABVAAwAAQABAAMAAABXAA4AAQAFAAMAAABWAA4AAQAFAAMAAABVAA4AAQABAAYAAAAlAB4AAQAGAAYAAAAkAB4AAQAUAA4AAAAlAB0AAQAGAAQAAAAlABwAAQAZAAsAAAAlABsAAQADAAIAAAAlABoAAQATABEAAAAlABkAAQAGAAUAAAAlABgAAQADAAUAAAAlABcAAQAGAAQAAAAlABYAAQAXAA8AAAAlABUAAQAGAAEAAAAlABQAAQADAAQAAAAlABMAAQAAAAIAAAAlABIAAQAMAAcAAAAlABEAAQAGAAQAAAAlABAAAQAXAAIAAAAlAA8AAQAAAAEAAAA=")
+tile_set = ExtResource("2_6npqa")
+metadata/_edit_lock_ = true
+
+[node name="TileMapLayer_Pipes" type="TileMapLayer" parent="Level/Environment" index="2"]
+tile_map_data = PackedByteArray("AAAeABYAAQABAAAAAAAfABYAAQABAAAAAAAgABYAAQABAAAAAAA=")
+tile_set = SubResource("TileSet_5lb36")
+
+[node name="Lamps" type="Node2D" parent="Level/Environment" index="3"]
+
+[node name="BulkHeadLampSmall2" parent="Level/Environment/Lamps" index="0" instance=ExtResource("4_7r5d1")]
+position = Vector2(784, 704)
+
+[node name="BulkHeadLampSmall3" parent="Level/Environment/Lamps" index="1" instance=ExtResource("4_7r5d1")]
+position = Vector2(1184, 818)
+rotation = 1.5707941
+
+[node name="BulkHeadLampSmall8" parent="Level/Environment/Lamps" index="2" instance=ExtResource("4_7r5d1")]
+position = Vector2(1136, 416)
+
+[node name="BulkHeadLampSmall9" parent="Level/Environment/Lamps" index="3" instance=ExtResource("4_7r5d1")]
+position = Vector2(1560, 416)
+
+[node name="BulkHeadLampSmall11" parent="Level/Environment/Lamps" index="4" instance=ExtResource("4_7r5d1")]
+position = Vector2(1904, 384)
+
+[node name="BulkHeadLampSmall12" parent="Level/Environment/Lamps" index="5" instance=ExtResource("4_7r5d1")]
+position = Vector2(1904, 480)
+rotation = -3.1415927
+
+[node name="Content" type="Node2D" parent="Level" index="2"]
+
+[node name="CheckPoints" type="Node2D" parent="Level/Content" index="0"]
+
+[node name="CheckPoint" parent="Level/Content/CheckPoints" index="0" instance=ExtResource("9_1sfm5")]
+position = Vector2(1072, 752)
+
+[node name="CheckPoint5" parent="Level/Content/CheckPoints" index="1" instance=ExtResource("9_1sfm5")]
+position = Vector2(1424, 432)
+
+[node name="CheckPoint6" parent="Level/Content/CheckPoints" index="2" instance=ExtResource("9_1sfm5")]
+position = Vector2(2256, 432)
+
+[node name="Entities" type="Node2D" parent="Level/Content" index="1"]
+
+[node name="Player" parent="Level/Content/Entities" index="0" instance=ExtResource("3_ch276")]
+position = Vector2(560, 944)
+rotation = -6.2831855
+metadata/_edit_group_ = true
+
+[node name="Camera2D" type="Camera2D" parent="Level/Content/Entities/Player" index="5" node_paths=PackedStringArray("tilemap_layer")]
+zoom = Vector2(4, 4)
+script = ExtResource("9_boelf")
+tilemap_layer = NodePath("../../../../Environment/WallTiles")
+
+[node name="Enemies" type="Node2D" parent="Level/Content/Entities" index="1"]
+
+[node name="Eyes" type="Node2D" parent="Level/Content/Entities/Enemies" index="0"]
+
+[node name="Eye" parent="Level/Content/Entities/Enemies/Eyes" index="0" instance=ExtResource("11_roxbw")]
+position = Vector2(848, 816)
+start_look = 1
+
+[node name="Patrol Path" type="Line2D" parent="Level/Content/Entities/Enemies/Eyes/Eye" index="17"]
+points = PackedVector2Array(0, 0, 224, 0)
+default_color = Color(0, 0, 1, 1)
+
+[node name="Eye2" parent="Level/Content/Entities/Enemies/Eyes" index="1" instance=ExtResource("11_roxbw")]
+position = Vector2(1472, 560)
+start_look = 1
+
+[node name="Patrol Path" type="Line2D" parent="Level/Content/Entities/Enemies/Eyes/Eye2" index="17"]
+points = PackedVector2Array(0, 0, 0, -256)
+default_color = Color(0, 0, 1, 1)
+
+[node name="Eye3" parent="Level/Content/Entities/Enemies/Eyes" index="2" instance=ExtResource("11_roxbw")]
+position = Vector2(1856, 560)
+start_look = 1
+
+[node name="Patrol Path" type="Line2D" parent="Level/Content/Entities/Enemies/Eyes/Eye3" index="17"]
+points = PackedVector2Array(0, 0, 0, -256)
+default_color = Color(0, 0, 1, 1)
+
+[node name="Eye4" parent="Level/Content/Entities/Enemies/Eyes" index="3" instance=ExtResource("11_roxbw")]
+position = Vector2(1952, 304)
+start_look = 1
+
+[node name="Patrol Path" type="Line2D" parent="Level/Content/Entities/Enemies/Eyes/Eye4" index="17"]
+points = PackedVector2Array(0, 0, 0, 256)
+default_color = Color(0, 0, 1, 1)
+
+[node name="Eye5" parent="Level/Content/Entities/Enemies/Eyes" index="4" instance=ExtResource("11_roxbw")]
+position = Vector2(2336, 560)
+start_look = 1
+
+[node name="Patrol Path" type="Line2D" parent="Level/Content/Entities/Enemies/Eyes/Eye5" index="17"]
+points = PackedVector2Array(0, 0, 0, -256)
+default_color = Color(0, 0, 1, 1)
+
+[node name="Eye6" parent="Level/Content/Entities/Enemies/Eyes" index="5" instance=ExtResource("11_roxbw")]
+position = Vector2(2432, 304)
+start_look = 1
+
+[node name="Patrol Path" type="Line2D" parent="Level/Content/Entities/Enemies/Eyes/Eye6" index="17"]
+points = PackedVector2Array(0, 0, 0, 256)
+default_color = Color(0, 0, 1, 1)
+
+[node name="Eye7" parent="Level/Content/Entities/Enemies/Eyes" index="6" instance=ExtResource("11_roxbw")]
+position = Vector2(2528, 560)
+start_look = 1
+
+[node name="Patrol Path" type="Line2D" parent="Level/Content/Entities/Enemies/Eyes/Eye7" index="17"]
+points = PackedVector2Array(0, 0, 0, -256)
+default_color = Color(0, 0, 1, 1)
+
+[node name="Eye8" parent="Level/Content/Entities/Enemies/Eyes" index="7" instance=ExtResource("11_roxbw")]
+position = Vector2(2624, 304)
+start_look = 1
+
+[node name="Patrol Path" type="Line2D" parent="Level/Content/Entities/Enemies/Eyes/Eye8" index="17"]
+points = PackedVector2Array(0, 0, 0, 256)
+default_color = Color(0, 0, 1, 1)
+
+[node name="Lasers" type="Node2D" parent="Level/Content/Entities/Enemies" index="1"]
+
+[node name="WallLaser" parent="Level/Content/Entities/Enemies/Lasers" index="0" instance=ExtResource("9_vmu3y")]
+position = Vector2(1104, 896)
+
+[node name="Dragable" parent="Level/Content/Entities" index="2" instance=ExtResource("8_i11l1")]
+position = Vector2(976, 944)
+
+[node name="LevelFinish" parent="Level/Content" index="2" instance=ExtResource("5_o7uoy")]
+position = Vector2(3056, 432)
+rotation = 7.670326e-05
+
+[node name="Doors" type="Node2D" parent="Level/Content" index="3"]
+
+[node name="PowerDoor" parent="Level/Content/Doors" index="0" instance=ExtResource("14_xabcf")]
+position = Vector2(1120, 672)
+rotation = -1.5707964
+
+[node name="LevelMenus" type="CanvasLayer" parent="Level" index="3"]
+visible = false
+
+[node name="LevelGameOverMenu" parent="Level/LevelMenus" index="0" instance=ExtResource("6_i11l1")]
+
+[node name="LevelFinishedMenu" parent="Level/LevelMenus" index="1" instance=ExtResource("7_1sfm5")]
+
+[node name="GameCompletedMenu" parent="Level/LevelMenus" index="2" instance=ExtResource("8_6lis1")]
+
+[node name="InGameMenu" parent="Level/LevelMenus" index="3" instance=ExtResource("14_6lis1")]
+
+[node name="PostProcessing" type="Node2D" parent="Level" index="4"]
+visible = false
+script = ExtResource("16_4xxer")
+enable_on_start = true
+
+[node name="CanvasModulate" type="CanvasModulate" parent="Level/PostProcessing" index="0"]
+color = Color(0.18616897, 0.18616405, 0.20844302, 1)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Level/PostProcessing" index="1"]
+environment = ExtResource("17_vmu3y")
+
+[node name="GameHud" parent="." index="1" node_paths=PackedStringArray("player") instance=ExtResource("20_5lb36")]
+player = NodePath("../Level/Content/Entities/Player")

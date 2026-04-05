@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cilf008vsla35"]
+
+[ext_resource type="Script" uid="uid://cpk8dgql7fqoj" path="res://Components/RayCast2DGroup/ray_cast_2d_group.gd" id="1_0lqjj"]
+
+[node name="RayCast2DGroup" type="Node2D" groups=["scene_reset"]]
+light_mask = 0
+script = ExtResource("1_0lqjj")

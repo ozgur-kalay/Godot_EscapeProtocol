@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://d2lddkaps273j"]
+
+[ext_resource type="Script" uid="uid://dptxf0yphn7ye" path="res://PlayContent/Interactables/LevelFinish/level_finish.gd" id="1_ws8ua"]
+
+[sub_resource type="Gradient" id="Gradient_ws8ua"]
+offsets = PackedFloat32Array(0.99798)
+colors = PackedColorArray(0, 0.737255, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_8s6gt"]
+gradient = SubResource("Gradient_ws8ua")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3361g"]
+size = Vector2(32, 32)
+
+[node name="LevelFinish" type="Node2D"]
+script = ExtResource("1_ws8ua")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = SubResource("GradientTexture2D_8s6gt")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_3361g")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 17.0
+offset_bottom = 7.0
+theme_override_font_sizes/font_size = 10
+text = "FINISH"
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

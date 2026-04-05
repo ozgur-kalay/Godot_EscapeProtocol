@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dqrtw65sk28h8"]
+
+[ext_resource type="Texture2D" uid="uid://mnl2d8lo674e" path="res://Assets/destructible_wall_sprite.png" id="1_xpd81"]
+
+[node name="DestructibleWall" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_xpd81")

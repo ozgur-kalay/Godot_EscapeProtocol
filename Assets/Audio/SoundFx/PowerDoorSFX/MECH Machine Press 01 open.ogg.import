@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://bl1be80fa1n4h"
+path="res://.godot/imported/MECH Machine Press 01 open.ogg-901480c85bc6eedc0cee7cd5030df193.oggvorbisstr"
+
+[deps]
+
+source_file="res://Assets/Audio/SoundFx/PowerDoorSFX/MECH Machine Press 01 open.ogg"
+dest_files=["res://.godot/imported/MECH Machine Press 01 open.ogg-901480c85bc6eedc0cee7cd5030df193.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4

@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://lypxdf8wj2j"]
+
+[ext_resource type="PackedScene" uid="uid://dtv48kxoirsqt" path="res://Scenes/BaseScene/Base_scene.tscn" id="1_is42t"]
+[ext_resource type="PackedScene" uid="uid://cbuflejdgsemv" path="res://Scenes/Menus/GameFinishedMenu/game_finished_menu.tscn" id="2_roduc"]
+
+[node name="GameFinishedScene" instance=ExtResource("1_is42t")]
+
+[node name="Level" parent="." index="0"]
+process_mode = 4
+visible = false
+
+[node name="Camera2D" parent="Level/Content/Entities/Player" index="4"]
+enabled = false
+
+[node name="GameFinishedMenu" parent="." index="1" instance=ExtResource("2_roduc")]
+enabled_on_start = true

@@ -1,0 +1,49 @@
+[gd_scene load_steps=10 format=3 uid="uid://pl2ypow0wmik"]
+
+[ext_resource type="AudioStream" uid="uid://tdbiypv631dd" path="res://Assets/Audio/Music/OGG Dystopian by Tim Beek/Dark Atmosphere to Synth.ogg" id="1_8t457"]
+[ext_resource type="AudioStream" uid="uid://1h7iobk0u75g" path="res://Assets/Audio/Music/OGG Dystopian by Tim Beek/Surveillance.ogg" id="1_ll11f"]
+[ext_resource type="Script" uid="uid://by5ohncdxvxxe" path="res://AutoLoads/AudioManagers/music_manager.gd" id="1_mqdvf"]
+[ext_resource type="AudioStream" uid="uid://d3375ju612yeb" path="res://Assets/Audio/Music/OGG Dystopian by Tim Beek/Dystopian.ogg" id="2_mqdvf"]
+[ext_resource type="AudioStream" uid="uid://8crurtwcrh7c" path="res://Assets/Audio/Music/OGG Dystopian by Tim Beek/Empty Streets.ogg" id="3_0cbam"]
+[ext_resource type="AudioStream" uid="uid://dbo2lcsyicvje" path="res://Assets/Audio/Music/OGG Dystopian by Tim Beek/Mystery Unsolved.ogg" id="4_ti34o"]
+[ext_resource type="AudioStream" uid="uid://b8k8nooqc4ybo" path="res://Assets/Audio/Music/OGG Dystopian by Tim Beek/The Nightclub.ogg" id="6_0w73u"]
+[ext_resource type="AudioStream" uid="uid://bfalwpwa04r5k" path="res://Assets/Audio/Music/OGG Dystopian by Tim Beek/The Protagonist.ogg" id="7_bixuh"]
+[ext_resource type="AudioStream" uid="uid://cwst53ru5o8xj" path="res://Assets/Audio/Music/OGG Dystopian by Tim Beek/The Story Continues.ogg" id="8_7drrv"]
+
+[node name="MusicManager" type="Node"]
+script = ExtResource("1_mqdvf")
+
+[node name="OGG Dystopian by Tim Beek" type="Node" parent="."]
+
+[node name="DarkAtmosphereToSynth" type="AudioStreamPlayer" parent="OGG Dystopian by Tim Beek"]
+stream = ExtResource("1_8t457")
+parameters/looping = true
+
+[node name="Dystopian" type="AudioStreamPlayer" parent="OGG Dystopian by Tim Beek"]
+stream = ExtResource("2_mqdvf")
+volume_db = 2.0
+parameters/looping = true
+
+[node name="EmptyStreets" type="AudioStreamPlayer" parent="OGG Dystopian by Tim Beek"]
+stream = ExtResource("3_0cbam")
+parameters/looping = true
+
+[node name="MysteryUnsolved" type="AudioStreamPlayer" parent="OGG Dystopian by Tim Beek"]
+stream = ExtResource("4_ti34o")
+parameters/looping = true
+
+[node name="Surveillance" type="AudioStreamPlayer" parent="OGG Dystopian by Tim Beek"]
+stream = ExtResource("1_ll11f")
+parameters/looping = true
+
+[node name="TheNightclub" type="AudioStreamPlayer" parent="OGG Dystopian by Tim Beek"]
+stream = ExtResource("6_0w73u")
+parameters/looping = true
+
+[node name="TheProtagonist" type="AudioStreamPlayer" parent="OGG Dystopian by Tim Beek"]
+stream = ExtResource("7_bixuh")
+parameters/looping = true
+
+[node name="TheStoryContinues" type="AudioStreamPlayer" parent="OGG Dystopian by Tim Beek"]
+stream = ExtResource("8_7drrv")
+parameters/looping = true

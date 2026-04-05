@@ -1,0 +1,110 @@
+[gd_scene load_steps=6 format=3 uid="uid://13rwwrh5jdbt"]
+
+[ext_resource type="PackedScene" uid="uid://lfuh1u2osxsk" path="res://Scenes/Menus/BaseMenu/BaseMenu.tscn" id="1_yo6co"]
+[ext_resource type="Script" uid="uid://duvikie5yxt42" path="res://Scenes/Menus/MainMenu/menu_controls.gd" id="2_v763k"]
+[ext_resource type="Texture2D" uid="uid://c8rvf1hfcpjh" path="res://Assets/Logo/ChatGPT Image Sep 16, 2025, 02_21_26 AM.png" id="3_gphap"]
+[ext_resource type="PackedScene" uid="uid://bj54vyuhc7bbs" path="res://Scenes/Menus/SceneMenuButton/scene_menu_button.tscn" id="4_gphap"]
+[ext_resource type="Script" uid="uid://dy3tevqwp247n" path="res://Scenes/Menus/MainMenu/target_level_loader.gd" id="5_yobja"]
+
+[node name="MainMenu" instance=ExtResource("1_yo6co")]
+enabled_on_start = true
+
+[node name="MenuControls" parent="." index="0"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_v763k")
+
+[node name="Background" type="ColorRect" parent="MenuControls" index="0"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MenuControls" index="1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Spacer" type="Control" parent="MenuControls/HBoxContainer" index="0"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.15
+
+[node name="Logo" type="TextureRect" parent="MenuControls/HBoxContainer" index="1"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("3_gphap")
+
+[node name="CenterContainer" type="CenterContainer" parent="MenuControls/HBoxContainer" index="2"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MenuControls/HBoxContainer/CenterContainer" index="0"]
+layout_mode = 2
+theme_override_constants/separation = 60
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuControls/HBoxContainer/CenterContainer/VBoxContainer2" index="0"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Label" type="Label" parent="MenuControls/HBoxContainer/CenterContainer/VBoxContainer2/VBoxContainer" index="0"]
+layout_mode = 2
+text = "Move = WASD 
+Run/Pull/Push = LeftShift/RightShift"
+
+[node name="PlayButton" parent="MenuControls/HBoxContainer/CenterContainer/VBoxContainer2/VBoxContainer" index="1" instance=ExtResource("4_gphap")]
+layout_mode = 2
+text = "Play"
+
+[node name="ExitButton" parent="MenuControls/HBoxContainer/CenterContainer/VBoxContainer2/VBoxContainer" index="2" instance=ExtResource("4_gphap")]
+layout_mode = 2
+text = "Exit"
+
+[node name="TargetLevels" type="VBoxContainer" parent="MenuControls/HBoxContainer/CenterContainer/VBoxContainer2" index="1"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Target_Level_Loader" type="Control" parent="MenuControls/HBoxContainer/CenterContainer/VBoxContainer2/TargetLevels" index="0"]
+layout_mode = 2
+script = ExtResource("5_yobja")
+
+[node name="Label" type="Label" parent="MenuControls/HBoxContainer/CenterContainer/VBoxContainer2/TargetLevels" index="1"]
+layout_mode = 2
+text = "Level Select"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuControls/HBoxContainer/CenterContainer/VBoxContainer2/TargetLevels" index="2"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Level1Button" type="Button" parent="MenuControls/HBoxContainer/CenterContainer/VBoxContainer2/TargetLevels/VBoxContainer" index="0"]
+layout_mode = 2
+text = "Level 1"
+
+[node name="Level2Button" type="Button" parent="MenuControls/HBoxContainer/CenterContainer/VBoxContainer2/TargetLevels/VBoxContainer" index="1"]
+layout_mode = 2
+text = "Level 2"
+
+[node name="Level3Button" type="Button" parent="MenuControls/HBoxContainer/CenterContainer/VBoxContainer2/TargetLevels/VBoxContainer" index="2"]
+layout_mode = 2
+text = "Level 3"
+
+[connection signal="scene_menu_button_pressed" from="MenuControls/HBoxContainer/CenterContainer/VBoxContainer2/VBoxContainer/PlayButton" to="MenuControls" method="_on_play_button_scene_menu_button_pressed"]
+[connection signal="scene_menu_button_pressed" from="MenuControls/HBoxContainer/CenterContainer/VBoxContainer2/VBoxContainer/ExitButton" to="MenuControls" method="_on_exit_button_scene_menu_button_pressed"]
+[connection signal="pressed" from="MenuControls/HBoxContainer/CenterContainer/VBoxContainer2/TargetLevels/VBoxContainer/Level1Button" to="MenuControls/HBoxContainer/CenterContainer/VBoxContainer2/TargetLevels/Target_Level_Loader" method="_on_level_1_button_pressed"]
+[connection signal="pressed" from="MenuControls/HBoxContainer/CenterContainer/VBoxContainer2/TargetLevels/VBoxContainer/Level2Button" to="MenuControls/HBoxContainer/CenterContainer/VBoxContainer2/TargetLevels/Target_Level_Loader" method="_on_level_2_button_pressed"]
+[connection signal="pressed" from="MenuControls/HBoxContainer/CenterContainer/VBoxContainer2/TargetLevels/VBoxContainer/Level3Button" to="MenuControls/HBoxContainer/CenterContainer/VBoxContainer2/TargetLevels/Target_Level_Loader" method="_on_level_3_button_pressed"]

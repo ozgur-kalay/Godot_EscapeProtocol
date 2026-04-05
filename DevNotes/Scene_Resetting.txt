@@ -1,0 +1,3 @@
+
+Entities that need to be reset when the scene restarts needs to be added to group "scene_reset".
+The must also have mehtod "scene_reset() -> void:".

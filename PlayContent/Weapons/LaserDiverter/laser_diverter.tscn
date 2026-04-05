@@ -1,0 +1,99 @@
+[gd_scene load_steps=14 format=3 uid="uid://bfqbq3fx7y1wa"]
+
+[ext_resource type="PackedScene" uid="uid://br16a7c1dio2f" path="res://PlayContent/Interactables/DragableBox/dragable_box.tscn" id="1_yhglf"]
+[ext_resource type="Script" uid="uid://c4fhd28i8ti45" path="res://PlayContent/Weapons/LaserDiverter/laser_diverter.gd" id="2_2mnus"]
+[ext_resource type="Texture2D" uid="uid://ddrjdy4fg8qix" path="res://Assets/LaserDiverter/Laser_diverter_png.png" id="2_bq006"]
+[ext_resource type="Script" uid="uid://cvt5kw3trvpj1" path="res://Components/InteractionSystem/Interactable/interactable.gd" id="3_lil4f"]
+[ext_resource type="PackedScene" uid="uid://del7ob43nujpq" path="res://PlayContent/Weapons/LaserBeams/InfinateLaserBeam/infinite_laser_beam.tscn" id="4_2mnus"]
+[ext_resource type="Texture2D" uid="uid://y6ftm3spd12o" path="res://Assets/LaserDiverter/Laser_diverter_laser_line.png" id="4_o1403"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yhglf"]
+size = Vector2(28, 28)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0ul0i"]
+size = Vector2(32, 32)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_o1403"]
+polygon = PackedVector2Array(-13, -15, -15, -13, -15, -6, -13, -4, -13, 4, -15, 6, -15, 13, -13, 15, -6, 15, -4, 13, 4, 13, 6, 15, 13, 15, 15, 13, 15, 6, 13, 4, 13, -4, 15, -6, 15, -13, 13, -15, 6, -15, 4, -13, -4, -13, -6, -15)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2mnus"]
+size = Vector2(3, 6)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o1403"]
+size = Vector2(3, 6)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_bq006"]
+a = Vector2(-19, 0)
+b = Vector2(19, 0)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_0l1l5"]
+a = Vector2(0, 19)
+b = Vector2(0, -19)
+
+[node name="LaserDiverter" instance=ExtResource("1_yhglf")]
+script = ExtResource("2_2mnus")
+rotation_angle = "0"
+
+[node name="BodySprite" parent="." index="1"]
+texture = ExtResource("2_bq006")
+
+[node name="CollisionShape2D" parent="." index="2"]
+shape = SubResource("RectangleShape2D_yhglf")
+
+[node name="CollisionShape2D2" parent="." index="3"]
+shape = SubResource("RectangleShape2D_0ul0i")
+
+[node name="LightOccluder2D" parent="." index="4"]
+occluder = SubResource("OccluderPolygon2D_o1403")
+
+[node name="LaserLine" type="Sprite2D" parent="." index="5"]
+texture = ExtResource("4_o1403")
+
+[node name="Interactable" type="Area2D" parent="LaserLine" index="0"]
+collision_layer = 64
+collision_mask = 128
+script = ExtResource("3_lil4f")
+interaction_key = 6
+metadata/_custom_type_script = "uid://cvt5kw3trvpj1"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LaserLine/Interactable" index="0"]
+position = Vector2(0, 11)
+rotation = -1.5707964
+shape = SubResource("RectangleShape2D_2mnus")
+
+[node name="InfinateLaserBeam" parent="LaserLine" index="1" instance=ExtResource("4_2mnus")]
+process_mode = 4
+position = Vector2(-13, 0)
+rotation = 1.5707964
+enabled = false
+target_position = Vector2(3.496911e-07, 8)
+beam_enabled = false
+
+[node name="Interactable2" type="Area2D" parent="LaserLine" index="2"]
+collision_layer = 64
+collision_mask = 128
+script = ExtResource("3_lil4f")
+interaction_key = 6
+metadata/_custom_type_script = "uid://cvt5kw3trvpj1"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LaserLine/Interactable2" index="0"]
+position = Vector2(-11, 0)
+shape = SubResource("RectangleShape2D_o1403")
+
+[node name="InfinateLaserBeam2" parent="LaserLine" index="3" instance=ExtResource("4_2mnus")]
+process_mode = 4
+position = Vector2(0, 13)
+enabled = false
+target_position = Vector2(3.496911e-07, 8)
+beam_enabled = false
+
+[node name="CollisionShape2D" parent="DragInteractable" index="0"]
+shape = SubResource("SegmentShape2D_bq006")
+
+[node name="CollisionShape2D2" parent="DragInteractable" index="1"]
+shape = SubResource("SegmentShape2D_0l1l5")
+
+[connection signal="interaction_finished" from="LaserLine/Interactable" to="." method="_on_interactable_interaction_finished"]
+[connection signal="interaction_started" from="LaserLine/Interactable" to="." method="_on_interactable_interaction_started"]
+[connection signal="interaction_finished" from="LaserLine/Interactable2" to="." method="_on_interactable_2_interaction_finished"]
+[connection signal="interaction_started" from="LaserLine/Interactable2" to="." method="_on_interactable_2_interaction_started"]

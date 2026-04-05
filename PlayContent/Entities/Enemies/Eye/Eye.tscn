@@ -1,0 +1,135 @@
+[gd_scene load_steps=15 format=3 uid="uid://rvnj4sdlwouo"]
+
+[ext_resource type="Script" uid="uid://bipa8qfph3fvh" path="res://PlayContent/Entities/Enemies/Eye/eye.gd" id="1_b3nf1"]
+[ext_resource type="Texture2D" uid="uid://cmqu5hq2kahns" path="res://Assets/Eye.png" id="1_g4ic2"]
+[ext_resource type="Texture2D" uid="uid://dqpshl6krd1qn" path="res://Assets/Eye_sleep.png" id="2_yf0c0"]
+[ext_resource type="PackedScene" uid="uid://b7lew8k074nq6" path="res://PlayContent/Weapons/LaserBeams/ShootingLaserBeam/shooting_laser_beam.tscn" id="3_81yw4"]
+[ext_resource type="Script" uid="uid://c71arj3lfkqjs" path="res://PlayContent/Entities/Enemies/Eye/heart.gd" id="5_k5eus"]
+[ext_resource type="Script" uid="uid://c4kfh7gako8w8" path="res://Decorators/StateMachines/Node2DStateMachine/Node2DStateMachine.gd" id="5_qs5ba"]
+[ext_resource type="Script" uid="uid://dqs23nqjf4avx" path="res://PlayContent/Entities/Enemies/Eye/StateMachine/sleep_state.gd" id="5_yf0c0"]
+[ext_resource type="Script" uid="uid://ctwxcu7a2euud" path="res://PlayContent/Entities/Enemies/Eye/StateMachine/patrol_state.gd" id="6_8xvco"]
+[ext_resource type="Script" uid="uid://dkgm5ilg8scsg" path="res://PlayContent/Entities/Enemies/Eye/StateMachine/attack_state.gd" id="7_ffjpe"]
+[ext_resource type="Texture2D" uid="uid://bi0gkkpf4wq6y" path="res://Assets/LightTextures/POV_light_texture_flat_back.png" id="9_l4k1c"]
+[ext_resource type="Texture2D" uid="uid://2lri3617l70m" path="res://PlayContent/Entities/Enemies/Eye/eye_heart_texture.tres" id="10_qs5ba"]
+
+[sub_resource type="Animation" id="Animation_yentw"]
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_81yw4"]
+resource_name = "ray_cast_movement"
+length = 0.2
+loop_mode = 1
+step = 0.1
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mbsod"]
+_data = {
+&"RESET": SubResource("Animation_yentw"),
+&"ray_cast_movement": SubResource("Animation_81yw4")
+}
+
+[node name="Eye" type="Node2D" groups=["scene_reset"]]
+script = ExtResource("1_b3nf1")
+start_look = null
+
+[node name="EyeSprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_g4ic2")
+
+[node name="EyeSleep" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("2_yf0c0")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(96, -32)
+collision_mask = 17
+hit_from_inside = true
+collide_with_areas = true
+
+[node name="RayCast2D2" type="RayCast2D" parent="."]
+target_position = Vector2(96, -24)
+collision_mask = 17
+hit_from_inside = true
+collide_with_areas = true
+
+[node name="RayCast2D3" type="RayCast2D" parent="."]
+target_position = Vector2(96, -16)
+collision_mask = 17
+hit_from_inside = true
+collide_with_areas = true
+
+[node name="RayCast2D4" type="RayCast2D" parent="."]
+target_position = Vector2(96, -8)
+collision_mask = 17
+hit_from_inside = true
+collide_with_areas = true
+
+[node name="RayCast2D5" type="RayCast2D" parent="."]
+target_position = Vector2(96, 0)
+collision_mask = 17
+hit_from_inside = true
+collide_with_areas = true
+
+[node name="RayCast2D6" type="RayCast2D" parent="."]
+target_position = Vector2(96, 8)
+collision_mask = 17
+hit_from_inside = true
+collide_with_areas = true
+
+[node name="RayCast2D7" type="RayCast2D" parent="."]
+target_position = Vector2(96, 16)
+collision_mask = 17
+hit_from_inside = true
+collide_with_areas = true
+
+[node name="RayCast2D8" type="RayCast2D" parent="."]
+target_position = Vector2(96, 24)
+collision_mask = 17
+hit_from_inside = true
+collide_with_areas = true
+
+[node name="RayCast2D9" type="RayCast2D" parent="."]
+target_position = Vector2(96, 32)
+collision_mask = 17
+hit_from_inside = true
+collide_with_areas = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_mbsod")
+}
+autoplay = "ray_cast_movement"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(0, 0, 96, -32, 96, 32)
+
+[node name="ShootingLaserBeam" parent="." instance=ExtResource("3_81yw4")]
+position = Vector2(12, 0)
+collision_mask = 4
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("5_qs5ba")
+metadata/_custom_type_script = "uid://c4kfh7gako8w8"
+
+[node name="SleepState" type="Node" parent="StateMachine"]
+script = ExtResource("5_yf0c0")
+metadata/_custom_type_script = "uid://hh1ep151gig1"
+
+[node name="PatrolState" type="Node" parent="StateMachine"]
+script = ExtResource("6_8xvco")
+metadata/_custom_type_script = "uid://hh1ep151gig1"
+
+[node name="AttackState" type="Node" parent="StateMachine"]
+script = ExtResource("7_ffjpe")
+metadata/_custom_type_script = "uid://hh1ep151gig1"
+
+[node name="POV_Light" type="PointLight2D" parent="."]
+energy = 0.5
+range_item_cull_mask = 15
+shadow_enabled = true
+shadow_item_cull_mask = 31
+texture = ExtResource("9_l4k1c")
+offset = Vector2(48, 0)
+
+[node name="HEART_Light" type="PointLight2D" parent="."]
+color = Color(1, 0, 0, 1)
+texture = ExtResource("10_qs5ba")
+script = ExtResource("5_k5eus")

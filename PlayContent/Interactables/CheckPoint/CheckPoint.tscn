@@ -1,0 +1,47 @@
+[gd_scene load_steps=6 format=3 uid="uid://daer0ft6je62h"]
+
+[ext_resource type="Script" uid="uid://c4fa62u2p81nf" path="res://PlayContent/Interactables/CheckPoint/check_point.gd" id="1_tdts7"]
+[ext_resource type="Script" uid="uid://cvt5kw3trvpj1" path="res://Components/InteractionSystem/Interactable/interactable.gd" id="2_qoyjq"]
+
+[sub_resource type="Gradient" id="Gradient_tdts7"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0.04654255, 0.9175532)
+colors = PackedColorArray(0.7107411, 0.71074116, 0.7107411, 0.37254903, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_qoyjq"]
+gradient = SubResource("Gradient_tdts7")
+fill = 2
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tdts7"]
+size = Vector2(32, 32)
+
+[node name="CheckPoint" type="Node2D"]
+script = ExtResource("1_tdts7")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = SubResource("GradientTexture2D_qoyjq")
+
+[node name="Interactable" type="Area2D" parent="."]
+collision_layer = 64
+collision_mask = 128
+script = ExtResource("2_qoyjq")
+interaction_key = 4
+metadata/_custom_type_script = "uid://cvt5kw3trvpj1"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable"]
+shape = SubResource("RectangleShape2D_tdts7")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -45.0
+offset_top = -12.0
+offset_right = 47.0
+offset_bottom = 11.0
+theme_override_font_sizes/font_size = 6
+text = "Check 
+Point"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="interaction_started" from="Interactable" to="." method="_on_interactable_interaction_started"]

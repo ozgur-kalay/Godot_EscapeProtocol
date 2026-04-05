@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://sqxgr27o3o80"]
+
+[ext_resource type="Script" uid="uid://qupqdewb4rn0" path="res://Components/Detectors/EntityDetectors/entity_detector.gd" id="1_3p8tw"]
+
+[node name="EntityDetector" type="Node2D"]
+script = ExtResource("1_3p8tw")

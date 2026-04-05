@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://bulp87ts8se4m"]
+
+[ext_resource type="Texture2D" uid="uid://2pfcx74j8hen" path="res://Assets/ChatGPT-TileSet_Metalic.png" id="1_8j3en"]
+[ext_resource type="Script" uid="uid://v05k6hobvxu5" path="res://Components/DrawOrderComponent/z_index_component.gd" id="1_8stlh"]
+[ext_resource type="Texture2D" uid="uid://ckoikv36cdgfk" path="res://Assets/LightTextures/wall_light_eclipse_small.png" id="2_ihuei"]
+
+[node name="BulkHeadLampSmall" type="Node2D"]
+z_index = 2
+
+[node name="ZIndexComponent" type="Node" parent="."]
+script = ExtResource("1_8stlh")
+z_index = 4
+metadata/_custom_type_script = "uid://v05k6hobvxu5"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_8j3en")
+offset = Vector2(0, 4)
+region_enabled = true
+region_rect = Rect2(40, 128, 16, 8)
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+scale = Vector2(1, 1.3)
+energy = 0.5
+shadow_enabled = true
+shadow_item_cull_mask = 3
+texture = ExtResource("2_ihuei")
+offset = Vector2(0, 19)
+texture_scale = 1.2

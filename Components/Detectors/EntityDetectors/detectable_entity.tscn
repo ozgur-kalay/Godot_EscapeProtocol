@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bbl27qywpd6w3"]
+
+[ext_resource type="Script" uid="uid://qnwblmljwui3" path="res://Components/Detectors/EntityDetectors/detectable_entity.gd" id="1_r1oyc"]
+
+[node name="Detectable" type="Area2D"]
+collision_layer = 16
+collision_mask = 16
+script = ExtResource("1_r1oyc")

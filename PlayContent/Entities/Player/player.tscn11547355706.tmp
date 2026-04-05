@@ -1,0 +1,137 @@
+[gd_scene load_steps=21 format=3 uid="uid://bkqaslclk8enh"]
+
+[ext_resource type="Script" uid="uid://bq6rth4krrp1j" path="res://PlayContent/Entities/Player/player.gd" id="1_mv1ah"]
+[ext_resource type="Texture2D" uid="uid://tbp0sq65kakh" path="res://Assets/Aseprite/Player/player-Sheet.png" id="2_m6tet"]
+[ext_resource type="Script" uid="uid://cvmtsg4dwaif2" path="res://Components/Hit-Hurt_Boxes/hurt_box.gd" id="3_aswhi"]
+[ext_resource type="Script" uid="uid://cojaqk4s4w7sk" path="res://Decorators/StateMachines/CharacterStateMachine/character_state_machine.gd" id="3_m6tet"]
+[ext_resource type="Script" uid="uid://3e14nb1pd0i2" path="res://PlayContent/Entities/Player/idle_state.gd" id="4_qasal"]
+[ext_resource type="Script" uid="uid://cfs6xecsnwgju" path="res://PlayContent/Entities/Player/StateMachine/NormalState.gd" id="4_rwybs"]
+[ext_resource type="Script" uid="uid://m43u2al4t6ko" path="res://PlayContent/Entities/Player/StateMachine/chased_state.gd" id="5_lwghv"]
+[ext_resource type="Script" uid="uid://buai7gpinthww" path="res://PlayContent/Entities/Player/StateMachine/dead_state.gd" id="6_aswhi"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m6tet"]
+atlas = ExtResource("2_m6tet")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qasal"]
+atlas = ExtResource("2_m6tet")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w3bef"]
+atlas = ExtResource("2_m6tet")
+region = Rect2(32, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_716ym"]
+atlas = ExtResource("2_m6tet")
+region = Rect2(64, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s5uer"]
+atlas = ExtResource("2_m6tet")
+region = Rect2(96, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_esdow"]
+atlas = ExtResource("2_m6tet")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qo4oq"]
+atlas = ExtResource("2_m6tet")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b5820"]
+atlas = ExtResource("2_m6tet")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5qk3g"]
+atlas = ExtResource("2_m6tet")
+region = Rect2(96, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_b5820"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m6tet")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qasal")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w3bef")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_716ym")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s5uer")
+}],
+"loop": true,
+"name": &"run",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_esdow")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qo4oq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b5820")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5qk3g")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 6.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3uyv8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aswhi"]
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_mv1ah")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_b5820")
+animation = &"walk"
+autoplay = "idle"
+frame = 1
+frame_progress = 0.251504
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_3uyv8")
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("3_m6tet")
+metadata/_custom_type_script = "uid://cojaqk4s4w7sk"
+
+[node name="IdleState" type="Node" parent="StateMachine"]
+script = ExtResource("4_qasal")
+metadata/_custom_type_script = "uid://cse2kmjoacby8"
+
+[node name="WalkState" type="Node" parent="StateMachine"]
+script = ExtResource("4_rwybs")
+metadata/_custom_type_script = "uid://hh1ep151gig1"
+
+[node name="RunState" type="Node" parent="StateMachine"]
+script = ExtResource("5_lwghv")
+metadata/_custom_type_script = "uid://hh1ep151gig1"
+
+[node name="DeadState" type="Node" parent="StateMachine"]
+script = ExtResource("6_aswhi")
+metadata/_custom_type_script = "uid://hh1ep151gig1"
+
+[node name="HurtBox" type="Area2D" parent="."]
+script = ExtResource("3_aswhi")
+disable_on_start = false
+metadata/_custom_type_script = "uid://cvmtsg4dwaif2"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+shape = SubResource("RectangleShape2D_aswhi")
+debug_color = Color(0, 0.4, 0, 0.4)

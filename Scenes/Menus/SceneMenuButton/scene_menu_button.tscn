@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://bj54vyuhc7bbs"]
+
+[ext_resource type="Script" uid="uid://b26rygekfcgrm" path="res://Scenes/Menus/SceneMenuButton/scene_menu_button.gd" id="1_1d8uq"]
+[ext_resource type="AudioStream" uid="uid://ca3ux0wtctfgx" path="res://Assets/Audio/SoundFx/MenuButton/ui_menu_button_click_25.wav" id="2_h7eb1"]
+[ext_resource type="AudioStream" uid="uid://bdd81cstxd6di" path="res://Assets/Audio/SoundFx/MenuButton/ui_button_simple_click_07.wav" id="3_aelnp"]
+
+[node name="SceneMenuButton" type="Button"]
+text = "Menu Button"
+script = ExtResource("1_1d8uq")
+
+[node name="FocusedSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_h7eb1")
+volume_db = -8.0
+
+[node name="PressedSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_aelnp")
+volume_db = -9.0

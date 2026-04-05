@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://cl1wvdds3vlks"]
+
+[ext_resource type="Texture2D" uid="uid://2pfcx74j8hen" path="res://Assets/ChatGPT-TileSet_Metalic.png" id="1_bnn4e"]
+[ext_resource type="Script" uid="uid://dgyx4nafd31sp" path="res://PlayContent/Props/Lamps/OldBulkHeadLamp/bulk_head_lamp.gd" id="1_q47sj"]
+[ext_resource type="Texture2D" uid="uid://b3ip1whtcnehw" path="res://Assets/LightTextures/wall_light_eclipse.png" id="3_q47sj"]
+[ext_resource type="Script" uid="uid://v05k6hobvxu5" path="res://Components/DrawOrderComponent/z_index_component.gd" id="4_3mjdi"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3r32j"]
+size = Vector2(16, 8)
+
+[node name="BulkHeadLamp" type="Node2D"]
+z_index = 2
+script = ExtResource("1_q47sj")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_bnn4e")
+offset = Vector2(0, 4)
+region_enabled = true
+region_rect = Rect2(40, 128, 16, 8)
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+range_item_cull_mask = 15
+shadow_enabled = true
+shadow_item_cull_mask = 7
+texture = ExtResource("3_q47sj")
+offset = Vector2(0, 67)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, 4)
+shape = SubResource("RectangleShape2D_3r32j")
+
+[node name="ZIndexComponent" type="Node" parent="."]
+script = ExtResource("4_3mjdi")
+z_index = 4
+metadata/_custom_type_script = "uid://v05k6hobvxu5"

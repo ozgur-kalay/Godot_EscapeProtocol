@@ -1,0 +1,11 @@
+extends Node
+
+enum ZIndexes{
+	FLOOR, #0
+	FLOOR_PROPS, #1
+	INTERACTABLE_PROPS, #2 
+	PLAYER, #3
+	CEILING_PROPS, #4
+	WALLS, #5
+	SCREEN_PROPS, #6
+}

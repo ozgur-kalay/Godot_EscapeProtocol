@@ -1,0 +1,236 @@
+[gd_scene load_steps=20 format=3 uid="uid://bi8pnook500ep"]
+
+[ext_resource type="Texture2D" uid="uid://dt25omphon04q" path="res://Assets/power_door_sprite.png" id="1_axx1j"]
+[ext_resource type="Script" uid="uid://bp4roecrxfcgp" path="res://PlayContent/Interactables/PowerDoor/power_door.gd" id="1_fcsqf"]
+[ext_resource type="Script" uid="uid://c4kfh7gako8w8" path="res://Decorators/StateMachines/Node2DStateMachine/Node2DStateMachine.gd" id="2_8fac7"]
+[ext_resource type="Script" uid="uid://dmlctwwfp62un" path="res://PlayContent/Interactables/PowerDoor/power_door_static.gd" id="3_a6jp6"]
+[ext_resource type="Script" uid="uid://bjr8dtp0op0np" path="res://PlayContent/Interactables/PowerDoor/closed_state.gd" id="3_dhuqo"]
+[ext_resource type="Script" uid="uid://8xibi0lh6rfm" path="res://PlayContent/Interactables/PowerDoor/opening_state.gd" id="4_5kagy"]
+[ext_resource type="Script" uid="uid://bwunr2qs2hrd0" path="res://PlayContent/Interactables/PowerDoor/open_state.gd" id="4_g88sa"]
+[ext_resource type="PackedScene" uid="uid://crh7ng10x8exv" path="res://PlayContent/Interactables/PowerDoor/door_lamp.tscn" id="5_ritof"]
+[ext_resource type="Script" uid="uid://dgrddvjujqy4y" path="res://PlayContent/Interactables/PowerDoor/closing_state.gd" id="6_g88sa"]
+[ext_resource type="AudioStream" uid="uid://duamjwnkx560o" path="res://Assets/Audio/SoundFx/PowerDoorSFX/MECH Machine Press 01 close.ogg" id="6_pja3q"]
+[ext_resource type="Script" uid="uid://blils1f3dcixl" path="res://PlayContent/Interactables/PowerDoor/low_power_state.gd" id="7_5kagy"]
+[ext_resource type="AudioStream" uid="uid://bl1be80fa1n4h" path="res://Assets/Audio/SoundFx/PowerDoorSFX/MECH Machine Press 01 open.ogg" id="7_k8ibt"]
+[ext_resource type="PackedScene" uid="uid://3p5k1lo2cusv" path="res://Components/InteractionSystem/Interactable/interactable.tscn" id="10_0irc3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a6jp6"]
+size = Vector2(80, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fcsqf"]
+size = Vector2(12, 64)
+
+[sub_resource type="Animation" id="Animation_rfndq"]
+resource_name = "Door_Close"
+length = 0.2
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 0), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SoundFX/MechMachinePress01Close:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PowerDoorStatic:process_mode")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_fcsqf"]
+resource_name = "Door_Open"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SoundFX/MechMachinePress01Open:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PowerDoorStatic:process_mode")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1e-05),
+"update": 1,
+"values": [4]
+}
+
+[sub_resource type="Animation" id="Animation_ritof"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SoundFX/MechMachinePress01Close:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("SoundFX/MechMachinePress01Open:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("PowerDoorStatic:process_mode")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rfndq"]
+_data = {
+&"Door_Close": SubResource("Animation_rfndq"),
+&"Door_Open": SubResource("Animation_fcsqf"),
+&"RESET": SubResource("Animation_ritof")
+}
+
+[node name="PowerDoor" type="Node2D"]
+z_index = 10
+script = ExtResource("1_fcsqf")
+
+[node name="Node2DStateMachine" type="Node" parent="."]
+script = ExtResource("2_8fac7")
+metadata/_custom_type_script = "uid://c4kfh7gako8w8"
+
+[node name="ClosedState" type="Node" parent="Node2DStateMachine"]
+script = ExtResource("3_dhuqo")
+metadata/_custom_type_script = "uid://hh1ep151gig1"
+
+[node name="OpeningState" type="Node" parent="Node2DStateMachine"]
+script = ExtResource("4_5kagy")
+metadata/_custom_type_script = "uid://hh1ep151gig1"
+
+[node name="OpenState" type="Node" parent="Node2DStateMachine"]
+script = ExtResource("4_g88sa")
+metadata/_custom_type_script = "uid://hh1ep151gig1"
+
+[node name="Timer" type="Timer" parent="Node2DStateMachine/OpenState"]
+
+[node name="ClosingState" type="Node" parent="Node2DStateMachine"]
+script = ExtResource("6_g88sa")
+metadata/_custom_type_script = "uid://hh1ep151gig1"
+
+[node name="LowPowerState" type="Node" parent="Node2DStateMachine"]
+script = ExtResource("7_5kagy")
+metadata/_custom_type_script = "uid://hh1ep151gig1"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_axx1j")
+offset = Vector2(0, 32)
+
+[node name="DoorInteractable" parent="." instance=ExtResource("10_0irc3")]
+interaction_key = 10
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DoorInteractable"]
+position = Vector2(0, 32)
+shape = SubResource("RectangleShape2D_a6jp6")
+
+[node name="PowerDoorStatic" type="StaticBody2D" parent="."]
+script = ExtResource("3_a6jp6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PowerDoorStatic"]
+position = Vector2(0, 32)
+shape = SubResource("RectangleShape2D_fcsqf")
+debug_color = Color(0.88479376, 0.000314005, 0.8111105, 0.41960785)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_rfndq")
+}
+
+[node name="DoorLamp" parent="." instance=ExtResource("5_ritof")]
+position = Vector2(0, 16)
+
+[node name="DoorLamp2" parent="." instance=ExtResource("5_ritof")]
+position = Vector2(0, 48)
+rotation = 3.1415927
+
+[node name="SoundFX" type="Node" parent="."]
+
+[node name="MechMachinePress01Close" type="AudioStreamPlayer" parent="SoundFX"]
+stream = ExtResource("6_pja3q")
+bus = &"PowerDoor"
+
+[node name="MechMachinePress01Open" type="AudioStreamPlayer" parent="SoundFX"]
+stream = ExtResource("7_k8ibt")
+bus = &"PowerDoor"
+
+[connection signal="interaction_finished" from="DoorInteractable" to="Node2DStateMachine/OpenState" method="_on_interactable_interaction_finished"]
+[connection signal="interaction_finished" from="DoorInteractable" to="Node2DStateMachine/OpenState" method="_on_door_interactable_interaction_finished"]
+[connection signal="interaction_started" from="DoorInteractable" to="Node2DStateMachine/ClosedState" method="_on_door_interactable_interaction_started"]
+[connection signal="interaction_started" from="DoorInteractable" to="Node2DStateMachine/OpenState" method="_on_door_interactable_interaction_started"]

@@ -1,0 +1,168 @@
+[gd_scene load_steps=16 format=3 uid="uid://n54o5obetf8x"]
+
+[ext_resource type="Texture2D" uid="uid://cmqu5hq2kahns" path="res://Assets/Eye.png" id="1_fsj86"]
+[ext_resource type="Script" uid="uid://cp3v8u25lwwce" path="res://PlayContent/Entities/Enemies/Eye_v1/eye.gd" id="1_tsfui"]
+[ext_resource type="PackedScene" uid="uid://b7lew8k074nq6" path="res://PlayContent/Weapons/LaserBeams/ShootingLaserBeam/shooting_laser_beam.tscn" id="2_gnln6"]
+[ext_resource type="Texture2D" uid="uid://c5n7h576evcuo" path="res://icon.svg" id="2_l4k1c"]
+[ext_resource type="PackedScene" uid="uid://sqxgr27o3o80" path="res://Components/Detectors/EntityDetectors/entity_detector.tscn" id="3_fn6fh"]
+[ext_resource type="Texture2D" uid="uid://s78btgvgubl5" path="res://Assets/LightTextures/POV_light_texture.png" id="4_fuh8u"]
+[ext_resource type="Texture2D" uid="uid://dqpshl6krd1qn" path="res://Assets/Eye_sleep.png" id="5_bpu0k"]
+[ext_resource type="Script" uid="uid://c71arj3lfkqjs" path="res://PlayContent/Entities/Enemies/Eye/heart.gd" id="5_k5eus"]
+[ext_resource type="Script" uid="uid://gbbdwwn8ihvc" path="res://PlayContent/Entities/Enemies/Eye_v1/pov_light.gd" id="5_mkfvi"]
+[ext_resource type="Script" uid="uid://c4kfh7gako8w8" path="res://Decorators/StateMachines/Node2DStateMachine/Node2DStateMachine.gd" id="8_qs5ba"]
+[ext_resource type="Texture2D" uid="uid://2lri3617l70m" path="res://PlayContent/Entities/Enemies/Eye/eye_heart_texture.tres" id="8_rrd4p"]
+[ext_resource type="Script" uid="uid://uqag1iroyp48" path="res://PlayContent/Entities/Enemies/Eye_v1/States/patrol_state.gd" id="9_l4k1c"]
+[ext_resource type="Script" uid="uid://dma2wtid1qv6" path="res://PlayContent/Entities/Enemies/Eye_v1/States/attack_state.gd" id="10_gnln6"]
+[ext_resource type="Script" uid="uid://bnup2soc4tchg" path="res://PlayContent/Entities/Enemies/Eye_v1/sleep_state.gd" id="12_bpu0k"]
+[ext_resource type="Script" uid="uid://cpk8dgql7fqoj" path="res://Components/RayCast2DGroup/ray_cast_2d_group.gd" id="12_gnln6"]
+
+[node name="Eye" type="Node2D" groups=["scene_reset"]]
+light_mask = 32
+script = ExtResource("1_tsfui")
+
+[node name="ShootingLaserBeam" parent="." instance=ExtResource("2_gnln6")]
+collision_mask = 1029
+
+[node name="TestBackground" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(0.282407, 0.282407, 0.282407, 1)
+position = Vector2(50, -11)
+scale = Vector2(1.5625, 1)
+texture = ExtResource("2_l4k1c")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_fsj86")
+
+[node name="SleepSprite" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("5_bpu0k")
+
+[node name="POVLight" type="PointLight2D" parent="."]
+energy = 0.5
+range_item_cull_mask = 15
+shadow_enabled = true
+shadow_item_cull_mask = 31
+texture = ExtResource("4_fuh8u")
+offset = Vector2(48, 0)
+script = ExtResource("5_mkfvi")
+
+[node name="Heart" type="PointLight2D" parent="."]
+process_mode = 3
+position = Vector2(-4, 0)
+scale = Vector2(0.78125, 0.78125)
+color = Color(1, 0, 0, 0.47451)
+energy = 0.3
+blend_mode = 2
+texture = ExtResource("8_rrd4p")
+script = ExtResource("5_k5eus")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("client")]
+script = ExtResource("8_qs5ba")
+client = NodePath("..")
+metadata/_custom_type_script = "uid://c4kfh7gako8w8"
+
+[node name="SleepState" type="Node" parent="StateMachine"]
+script = ExtResource("12_bpu0k")
+metadata/_custom_type_script = "uid://hh1ep151gig1"
+
+[node name="PatrolState" type="Node" parent="StateMachine"]
+script = ExtResource("9_l4k1c")
+metadata/_custom_type_script = "uid://hh1ep151gig1"
+
+[node name="AttackState" type="Node" parent="StateMachine"]
+script = ExtResource("10_gnln6")
+metadata/_custom_type_script = "uid://hh1ep151gig1"
+
+[node name="EntityDetectorRayCast2DGroup" parent="." instance=ExtResource("3_fn6fh")]
+
+[node name="RayCast2DGroup" type="Node2D" parent="EntityDetectorRayCast2DGroup"]
+script = ExtResource("12_gnln6")
+collision_mask = 1041
+metadata/_custom_type_script = "uid://cpk8dgql7fqoj"
+
+[node name="RayCast2D" type="RayCast2D" parent="EntityDetectorRayCast2DGroup/RayCast2DGroup"]
+target_position = Vector2(96, -32)
+collision_mask = 1041
+collide_with_areas = true
+
+[node name="RayCast2D2" type="RayCast2D" parent="EntityDetectorRayCast2DGroup/RayCast2DGroup"]
+target_position = Vector2(96, -28)
+collision_mask = 1041
+collide_with_areas = true
+
+[node name="RayCast2D3" type="RayCast2D" parent="EntityDetectorRayCast2DGroup/RayCast2DGroup"]
+target_position = Vector2(96, -24)
+collision_mask = 1041
+collide_with_areas = true
+
+[node name="RayCast2D4" type="RayCast2D" parent="EntityDetectorRayCast2DGroup/RayCast2DGroup"]
+target_position = Vector2(96, -20)
+collision_mask = 1041
+collide_with_areas = true
+
+[node name="RayCast2D5" type="RayCast2D" parent="EntityDetectorRayCast2DGroup/RayCast2DGroup"]
+target_position = Vector2(96, -16)
+collision_mask = 1041
+collide_with_areas = true
+
+[node name="RayCast2D6" type="RayCast2D" parent="EntityDetectorRayCast2DGroup/RayCast2DGroup"]
+target_position = Vector2(96, -12)
+collision_mask = 1041
+collide_with_areas = true
+
+[node name="RayCast2D7" type="RayCast2D" parent="EntityDetectorRayCast2DGroup/RayCast2DGroup"]
+target_position = Vector2(96, -8)
+collision_mask = 1041
+collide_with_areas = true
+
+[node name="RayCast2D8" type="RayCast2D" parent="EntityDetectorRayCast2DGroup/RayCast2DGroup"]
+target_position = Vector2(96, -4)
+collision_mask = 1041
+collide_with_areas = true
+
+[node name="RayCast2D9" type="RayCast2D" parent="EntityDetectorRayCast2DGroup/RayCast2DGroup"]
+target_position = Vector2(96, 0)
+collision_mask = 1041
+collide_with_areas = true
+
+[node name="RayCast2D10" type="RayCast2D" parent="EntityDetectorRayCast2DGroup/RayCast2DGroup"]
+target_position = Vector2(96, 4)
+collision_mask = 1041
+collide_with_areas = true
+
+[node name="RayCast2D11" type="RayCast2D" parent="EntityDetectorRayCast2DGroup/RayCast2DGroup"]
+target_position = Vector2(96, 8)
+collision_mask = 1041
+collide_with_areas = true
+
+[node name="RayCast2D12" type="RayCast2D" parent="EntityDetectorRayCast2DGroup/RayCast2DGroup"]
+target_position = Vector2(96, 12)
+collision_mask = 1041
+collide_with_areas = true
+
+[node name="RayCast2D13" type="RayCast2D" parent="EntityDetectorRayCast2DGroup/RayCast2DGroup"]
+target_position = Vector2(96, 16)
+collision_mask = 1041
+collide_with_areas = true
+
+[node name="RayCast2D14" type="RayCast2D" parent="EntityDetectorRayCast2DGroup/RayCast2DGroup"]
+target_position = Vector2(96, 20)
+collision_mask = 1041
+collide_with_areas = true
+
+[node name="RayCast2D15" type="RayCast2D" parent="EntityDetectorRayCast2DGroup/RayCast2DGroup"]
+target_position = Vector2(96, 24)
+collision_mask = 1041
+collide_with_areas = true
+
+[node name="RayCast2D16" type="RayCast2D" parent="EntityDetectorRayCast2DGroup/RayCast2DGroup"]
+target_position = Vector2(96, 28)
+collision_mask = 1041
+collide_with_areas = true
+
+[node name="RayCast2D17" type="RayCast2D" parent="EntityDetectorRayCast2DGroup/RayCast2DGroup"]
+target_position = Vector2(96, 32)
+collision_mask = 1041
+collide_with_areas = true
+
+[connection signal="detectable_detected" from="EntityDetectorRayCast2DGroup" to="StateMachine/PatrolState" method="_on_entity_detector_detectable_detected"]

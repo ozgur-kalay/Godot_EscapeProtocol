@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://dkp8e6wjaefmp"]
+
+[ext_resource type="PackedScene" uid="uid://c4al8b0fr4w0v" path="res://PlayContent/Props/Lamps/CeilingLamps/Base/base_ceiling_lamp.tscn" id="1_t3wmy"]
+[ext_resource type="Texture2D" uid="uid://cbqscb5llsl0g" path="res://Assets/Props/BulkHeadLamp.png" id="2_vjadc"]
+[ext_resource type="Texture2D" uid="uid://cy88ke0imylvr" path="res://Assets/LightTextures/wall_light_eclipse_medium.png" id="3_uaunn"]
+
+[node name="BulkHeadLampSmall" instance=ExtResource("1_t3wmy")]
+
+[node name="Sprite2D" parent="." index="1"]
+texture = ExtResource("2_vjadc")
+offset = Vector2(0, 16)
+
+[node name="PointLight2D" parent="." index="2"]
+energy = 5.45
+range_item_cull_mask = 15
+shadow_enabled = true
+shadow_item_cull_mask = 3
+texture = ExtResource("3_uaunn")
+offset = Vector2(0, 32)

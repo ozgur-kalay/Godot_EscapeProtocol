@@ -1,0 +1,5 @@
+- BUG: Detectables collision shape does not reset after restarting level
+
+- INTERACTABLE AND INTERACTOR HIS HIGHLY BROKEN AFTER AreaSHape Entered implementation. FIX THIS!!!!!!
+
+- Build a proper player detectablity system.

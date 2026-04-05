@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://hclq8sig5ea1"]
+
+[ext_resource type="Material" uid="uid://chsjh7bwh04tn" path="res://PlayContent/Weapons/LaserBeam/laser_beam_hit_particles.tres" id="1_ga6f5"]
+[ext_resource type="Script" uid="uid://d3ushwek7c4wg" path="res://PlayContent/Weapons/LaserBeam/laser_beam.gd" id="1_v3rn6"]
+
+[node name="LaserBeam" type="RayCast2D"]
+collision_mask = 1029
+collide_with_areas = true
+script = ExtResource("1_v3rn6")
+
+[node name="HitParticles" type="GPUParticles2D" parent="."]
+amount = 15
+lifetime = 0.05
+explosiveness = 0.2
+randomness = 0.2
+trail_enabled = true
+trail_lifetime = 0.34
+process_material = ExtResource("1_ga6f5")
+
+[node name="Line2D" type="Line2D" parent="."]
+points = PackedVector2Array(0, 0, 0, 0)
+default_color = Color(1, 0, 0, 1)

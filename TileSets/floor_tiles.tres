@@ -1,0 +1,12 @@
+[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://bnhlq8ychokbt"]
+
+[ext_resource type="Texture2D" uid="uid://b3wxj4bp8mcyt" path="res://Assets/Aseprite/TileSet/Png/floor_tiles.png" id="1_1xtps"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kjs0f"]
+texture = ExtResource("1_1xtps")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+
+[resource]
+tile_size = Vector2i(64, 64)
+sources/1 = SubResource("TileSetAtlasSource_kjs0f")

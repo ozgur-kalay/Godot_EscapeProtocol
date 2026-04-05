@@ -1,0 +1,64 @@
+[gd_scene load_steps=11 format=3 uid="uid://vd7k1451kwuo"]
+
+[ext_resource type="Script" uid="uid://478edto4n6mu" path="res://PlayContent/Interactables/PowerUps/invisibility_field.gd" id="1_0x45u"]
+[ext_resource type="Script" uid="uid://jmn1nme1glka" path="res://Components/FadeModulator/fade_modulator.gd" id="2_hds38"]
+[ext_resource type="Texture2D" uid="uid://dtwul620y146o" path="res://Assets/invisibility_field_light.png" id="4_5hlrw"]
+[ext_resource type="Script" uid="uid://dsu8bpyyhc3i2" path="res://Components/PointLightEffects/light_flicker.gd" id="4_sepih"]
+[ext_resource type="Texture2D" uid="uid://bu3bhjnnmaaa7" path="res://Assets/invisibility_pad.png" id="4_ycctk"]
+[ext_resource type="Script" uid="uid://cyedl5yb3h0dm" path="res://Components/AudioGroup/audio_group.gd" id="6_hyfwf"]
+[ext_resource type="AudioStream" uid="uid://cjkojfpk5txqj" path="res://Assets/Audio/SoundFx/Sci-Fi/ForceField_Hum/ui_menu_button_scroll_tone_01.wav" id="8_hds38"]
+[ext_resource type="AudioStream" uid="uid://dyntrubmctlg1" path="res://Assets/Audio/SoundFx/Sci-Fi/ForceField_Hum/ui_menu_button_scroll_12.wav" id="9_qspdy"]
+[ext_resource type="PackedScene" uid="uid://3p5k1lo2cusv" path="res://Components/InteractionSystem/Interactable/interactable.tscn" id="10_hds38"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5gu0s"]
+size = Vector2(16.00599, 15.99401)
+
+[node name="InvisibilityField" type="Node2D"]
+light_mask = 0
+script = ExtResource("1_0x45u")
+
+[node name="BodySprite" type="Sprite2D" parent="."]
+light_mask = 4
+texture = ExtResource("4_ycctk")
+region_rect = Rect2(64, 128, 32, 32)
+
+[node name="Modulator_UP" type="Node" parent="BodySprite"]
+script = ExtResource("2_hds38")
+metadata/_custom_type_script = "uid://jmn1nme1glka"
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+color = Color(0, 0.3137834, 0.6019366, 1)
+energy = 2.67
+range_item_cull_mask = 13
+texture = ExtResource("4_5hlrw")
+texture_scale = 0.8
+
+[node name="LightFlicker" type="Node" parent="PointLight2D"]
+script = ExtResource("4_sepih")
+time = 0.5
+strength_min = 0.2
+strength_max = 9.0
+metadata/_custom_type_script = "uid://dsu8bpyyhc3i2"
+
+[node name="PassThroughSFX_Group" type="Node" parent="."]
+script = ExtResource("6_hyfwf")
+metadata/_custom_type_script = "uid://cyedl5yb3h0dm"
+
+[node name="UiMenuButtonScrollTone01" type="AudioStreamPlayer" parent="PassThroughSFX_Group"]
+stream = ExtResource("8_hds38")
+volume_db = -14.0
+pitch_scale = 2.0
+
+[node name="UiMenuButtonScroll12" type="AudioStreamPlayer" parent="PassThroughSFX_Group"]
+stream = ExtResource("9_qspdy")
+volume_db = -5.0
+
+[node name="InvisibilityInteractable" parent="." instance=ExtResource("10_hds38")]
+interaction_key = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InvisibilityInteractable"]
+position = Vector2(0, 2.3841858e-07)
+rotation = 0.00037432852
+shape = SubResource("RectangleShape2D_5gu0s")
+
+[connection signal="interaction_started" from="InvisibilityInteractable" to="." method="_on_interactable_interaction_started"]

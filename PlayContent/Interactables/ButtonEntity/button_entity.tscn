@@ -1,0 +1,44 @@
+[gd_scene load_steps=8 format=3 uid="uid://cvib615xpnm73"]
+
+[ext_resource type="Script" uid="uid://cvt5kw3trvpj1" path="res://Components/InteractionSystem/Interactable/interactable.gd" id="1_o3fsc"]
+[ext_resource type="Script" uid="uid://jgn0je8q7hvj" path="res://PlayContent/Interactables/ButtonEntity/button_entity.gd" id="1_u85bq"]
+[ext_resource type="Texture2D" uid="uid://cdnpbh8l36ocp" path="res://Assets/GPT_Button_2.png" id="2_u85bq"]
+[ext_resource type="Script" uid="uid://c4kfh7gako8w8" path="res://Decorators/StateMachines/Node2DStateMachine/Node2DStateMachine.gd" id="3_tl1w7"]
+[ext_resource type="Script" uid="uid://mxbcd0lq1qmr" path="res://PlayContent/Interactables/ButtonEntity/on_state.gd" id="4_u85bq"]
+[ext_resource type="Script" uid="uid://7tegmmwo72fo" path="res://PlayContent/Interactables/ButtonEntity/off_state.gd" id="5_o1y4s"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hmjw1"]
+size = Vector2(4, 4)
+
+[node name="ButtonEntity" type="Node2D"]
+script = ExtResource("1_u85bq")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_u85bq")
+region_enabled = true
+region_rect = Rect2(0, 0, 32, 32)
+
+[node name="OffInteractable" type="Area2D" parent="."]
+collision_layer = 64
+collision_mask = 128
+script = ExtResource("1_o3fsc")
+interaction_key = 2
+metadata/_custom_type_script = "uid://cvt5kw3trvpj1"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OffInteractable"]
+shape = SubResource("RectangleShape2D_hmjw1")
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("3_tl1w7")
+metadata/_custom_type_script = "uid://c4kfh7gako8w8"
+
+[node name="OnState" type="Node" parent="StateMachine"]
+script = ExtResource("4_u85bq")
+metadata/_custom_type_script = "uid://hh1ep151gig1"
+
+[node name="OffState" type="Node" parent="StateMachine"]
+script = ExtResource("5_o1y4s")
+metadata/_custom_type_script = "uid://hh1ep151gig1"
+
+[connection signal="interaction_finished" from="OffInteractable" to="StateMachine/OffState" method="_on_off_interactable_interaction_finished"]
+[connection signal="interaction_started" from="OffInteractable" to="StateMachine/OnState" method="_on_off_interactable_interaction_started"]
