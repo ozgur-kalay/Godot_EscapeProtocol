@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://d1deajq2fl7fi"]
+
+[ext_resource type="Script" uid="uid://ce6pde3ryhw4n" path="res://Components/DragingComponent/draging_component.gd" id="1_jb53n"]
+[ext_resource type="Texture2D" uid="uid://c5n7h576evcuo" path="res://icon.svg" id="2_y406m"]
+
+[node name="DragingComponent" type="Area2D"]
+collision_layer = 32768
+collision_mask = 16384
+script = ExtResource("1_jb53n")
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(512, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(512, 0)
+texture = ExtResource("2_y406m")

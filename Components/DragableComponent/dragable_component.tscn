@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://d3drwfut31sg4"]
+
+[ext_resource type="Script" uid="uid://c6xmhvkw5btck" path="res://Components/DragableComponent/dragable_component.gd" id="1_5001n"]
+
+[node name="DragableComponent" type="Area2D"]
+collision_layer = 16384
+collision_mask = 32768
+script = ExtResource("1_5001n")

@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://sosd73skajrj" path="res://Scenes/Menus/LevelGameOverMenu/level_game_over_menu.tscn" id="6_i11l1"]
 [ext_resource type="PackedScene" uid="uid://ciyv5i4tg5sno" path="res://Scenes/Menus/LevelFinishMenu/level_finished_menu.tscn" id="7_1sfm5"]
 [ext_resource type="PackedScene" uid="uid://c8q1dglunxrl2" path="res://Scenes/Menus/LevelGameCompletedMenu/game_completed_menu.tscn" id="8_6lis1"]
-[ext_resource type="PackedScene" uid="uid://br16a7c1dio2f" path="res://PlayContent/Interactables/DragableBox/dragable_box.tscn" id="8_i11l1"]
+[ext_resource type="PackedScene" uid="uid://br16a7c1dio2f" path="res://PlayContent/Interactables/DragableBox_old/dragable_box_old.tscn" id="8_i11l1"]
 [ext_resource type="PackedScene" uid="uid://daer0ft6je62h" path="res://PlayContent/Interactables/CheckPoint/CheckPoint.tscn" id="9_1sfm5"]
 [ext_resource type="Script" uid="uid://c37hsn57rv14" path="res://Scenes/PlayScenes/camera_2d.gd" id="9_boelf"]
 [ext_resource type="PackedScene" uid="uid://dlcshvxik04y" path="res://PlayContent/Weapons/LaserEmitters/WallLaser/wall_laser.tscn" id="9_vmu3y"]

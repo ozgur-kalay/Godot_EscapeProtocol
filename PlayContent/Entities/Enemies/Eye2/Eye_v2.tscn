@@ -1,7 +1,7 @@
 [gd_scene load_steps=15 format=3 uid="uid://dbf4dmwowmj83"]
 
 [ext_resource type="Script" uid="uid://cvt22qgfhrm3n" path="res://PlayContent/Entities/Enemies/Eye2/eye_v2.gd" id="1_847vu"]
-[ext_resource type="PackedScene" uid="uid://b7lew8k074nq6" path="res://PlayContent/Weapons/LaserBeams/ShootingLaserBeam/shooting_laser_beam.tscn" id="2_8pfpp"]
+[ext_resource type="PackedScene" uid="uid://b7lew8k074nq6" path="res://PlayContent/Weapons/LaserBeams_old/ShootingLaserBeam/shooting_laser_beam.tscn" id="2_8pfpp"]
 [ext_resource type="Texture2D" uid="uid://c5n7h576evcuo" path="res://icon.svg" id="3_daj50"]
 [ext_resource type="Texture2D" uid="uid://cmqu5hq2kahns" path="res://Assets/Eye.png" id="4_8wmh1"]
 [ext_resource type="Texture2D" uid="uid://dqpshl6krd1qn" path="res://Assets/Eye_sleep.png" id="5_tmk0t"]

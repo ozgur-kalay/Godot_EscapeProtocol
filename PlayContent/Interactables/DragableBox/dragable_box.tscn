@@ -1,94 +1,42 @@
-[gd_scene load_steps=14 format=3 uid="uid://br16a7c1dio2f"]
+[gd_scene load_steps=5 format=3 uid="uid://de3g51gh6j87d"]
 
-[ext_resource type="Script" uid="uid://o5wlv8gssf4t" path="res://PlayContent/Interactables/DragableBox/dragable_box.gd" id="1_ijgko"]
 [ext_resource type="Texture2D" uid="uid://1shr03ptr617" path="res://Assets/DragableBox.png" id="2_04vr5"]
-[ext_resource type="Script" uid="uid://v05k6hobvxu5" path="res://Components/DrawOrderComponent/z_index_component.gd" id="4_6yyps"]
-[ext_resource type="Script" uid="uid://jmn1nme1glka" path="res://Components/FadeModulator/fade_modulator.gd" id="4_oy1xf"]
-[ext_resource type="Script" uid="uid://jycccgl78yj3" path="res://Components/InteractionSystem/Interactor/interactor.gd" id="7_ts7du"]
-[ext_resource type="PackedScene" uid="uid://3p5k1lo2cusv" path="res://Components/InteractionSystem/Interactable/interactable.tscn" id="7_yr3t5"]
+[ext_resource type="PackedScene" uid="uid://d3drwfut31sg4" path="res://Components/DragableComponent/dragable_component.tscn" id="2_yevxt"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_6yyps"]
-size = Vector2(24, 24)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_04vr5"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8klwb"]
 size = Vector2(28, 28)
 
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_6yyps"]
-polygon = PackedVector2Array(-10, -12, -10, 12, 12, 12, 12, -12)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yevxt"]
+size = Vector2(6, 2)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_yr3t5"]
-size = Vector2(8, 8)
+[node name="DragableBox" type="CharacterBody2D"]
 
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_c3wd7"]
-a = Vector2(-18, 0)
-b = Vector2(18, 0)
-
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_0yxow"]
-a = Vector2(0, 18)
-b = Vector2(0, -18)
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_xwnbh"]
-radius = 40.0
-
-[node name="DragableBox" type="CharacterBody2D" groups=["scene_reset"]]
-collision_layer = 1025
-collision_mask = 1027
-motion_mode = 1
-script = ExtResource("1_ijgko")
-
-[node name="ZIndexModifierComponent" type="Node" parent="."]
-script = ExtResource("4_6yyps")
-z_index = 2
-metadata/_custom_type_script = "uid://v05k6hobvxu5"
-
-[node name="BodySprite" type="Sprite2D" parent="."]
-modulate = Color(1.8247963, 1.8247963, 1.8247963, 1)
+[node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_04vr5")
-region_rect = Rect2(64, 96, 32, 32)
-
-[node name="ModulatorInOut" type="Node" parent="BodySprite" node_paths=PackedStringArray("fade_in_client", "fade_out_client")]
-script = ExtResource("4_oy1xf")
-fade_in_color = Color(4.415934, 4.415934, 4.415934, 1)
-fade_in_time = 0.5
-fade_in_client = NodePath("../../LightInteractable")
-fade_in_signal = &"interaction_started_no_args"
-fade_out_client = NodePath("../../LightInteractable")
-fade_out_signal = &"interaction_finished_no_args"
-metadata/_custom_type_script = "uid://jmn1nme1glka"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_6yyps")
+shape = SubResource("RectangleShape2D_8klwb")
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_04vr5")
+[node name="DragableComponent" parent="." instance=ExtResource("2_yevxt")]
 
-[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
-occluder = SubResource("OccluderPolygon2D_6yyps")
-occluder_light_mask = 15391
+[node name="CollisionShape2D_Top" type="CollisionShape2D" parent="DragableComponent"]
+position = Vector2(0, -14)
+shape = SubResource("RectangleShape2D_yevxt")
+debug_color = Color(1.4439226e-07, 0.6292021, 0.4880591, 0.41960785)
 
-[node name="ButtonInteractor" type="Area2D" parent="."]
-collision_layer = 128
-collision_mask = 64
-script = ExtResource("7_ts7du")
-interaction_keys = Array[int]([2])
-metadata/_custom_type_script = "uid://jycccgl78yj3"
+[node name="CollisionShape2D_Bottom" type="CollisionShape2D" parent="DragableComponent"]
+position = Vector2(0, 14)
+shape = SubResource("RectangleShape2D_yevxt")
+debug_color = Color(1.4439226e-07, 0.6292021, 0.4880591, 0.41960785)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ButtonInteractor"]
-shape = SubResource("RectangleShape2D_yr3t5")
+[node name="CollisionShape2D_Left" type="CollisionShape2D" parent="DragableComponent"]
+position = Vector2(-14, 0)
+rotation = 1.5707964
+shape = SubResource("RectangleShape2D_yevxt")
+debug_color = Color(1.4439226e-07, 0.6292021, 0.4880591, 0.41960785)
 
-[node name="Node2D" type="Node2D" parent="."]
-
-[node name="DragInteractable" parent="." instance=ExtResource("7_yr3t5")]
-interaction_key = 3
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DragInteractable"]
-shape = SubResource("SegmentShape2D_c3wd7")
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="DragInteractable"]
-shape = SubResource("SegmentShape2D_0yxow")
-
-[node name="LightInteractable" parent="." instance=ExtResource("7_yr3t5")]
-interaction_key = 11
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LightInteractable"]
-shape = SubResource("CircleShape2D_xwnbh")
+[node name="CollisionShape2D_Right" type="CollisionShape2D" parent="DragableComponent"]
+position = Vector2(14, 0)
+rotation = -1.5707964
+shape = SubResource("RectangleShape2D_yevxt")
+debug_color = Color(1.4439226e-07, 0.6292021, 0.4880591, 0.41960785)

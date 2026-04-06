@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://dlcshvxik04y"]
 
-[ext_resource type="PackedScene" uid="uid://del7ob43nujpq" path="res://PlayContent/Weapons/LaserBeams/InfinateLaserBeam/infinite_laser_beam.tscn" id="1_d6668"]
+[ext_resource type="PackedScene" uid="uid://del7ob43nujpq" path="res://PlayContent/Weapons/LaserBeams_old/InfinateLaserBeam/infinite_laser_beam.tscn" id="1_d6668"]
 [ext_resource type="Script" uid="uid://l52631i2ua5m" path="res://PlayContent/Weapons/LaserEmitters/WallLaser/wall_laser.gd" id="1_fhrm0"]
 [ext_resource type="Texture2D" uid="uid://1x8otlf5awtp" path="res://Assets/wall_laser.png" id="2_6oenq"]
 [ext_resource type="Script" uid="uid://jmn1nme1glka" path="res://Components/FadeModulator/fade_modulator.gd" id="3_ovfxr"]

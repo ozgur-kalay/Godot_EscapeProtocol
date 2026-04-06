@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bipa8qfph3fvh" path="res://PlayContent/Entities/Enemies/Eye/eye.gd" id="1_b3nf1"]
 [ext_resource type="Texture2D" uid="uid://cmqu5hq2kahns" path="res://Assets/Eye.png" id="1_g4ic2"]
 [ext_resource type="Texture2D" uid="uid://dqpshl6krd1qn" path="res://Assets/Eye_sleep.png" id="2_yf0c0"]
-[ext_resource type="PackedScene" uid="uid://b7lew8k074nq6" path="res://PlayContent/Weapons/LaserBeams/ShootingLaserBeam/shooting_laser_beam.tscn" id="3_81yw4"]
+[ext_resource type="PackedScene" uid="uid://b7lew8k074nq6" path="res://PlayContent/Weapons/LaserBeams_old/ShootingLaserBeam/shooting_laser_beam.tscn" id="3_81yw4"]
 [ext_resource type="Script" uid="uid://c71arj3lfkqjs" path="res://PlayContent/Entities/Enemies/Eye/heart.gd" id="5_k5eus"]
 [ext_resource type="Script" uid="uid://c4kfh7gako8w8" path="res://Decorators/StateMachines/Node2DStateMachine/Node2DStateMachine.gd" id="5_qs5ba"]
 [ext_resource type="Script" uid="uid://dqs23nqjf4avx" path="res://PlayContent/Entities/Enemies/Eye/StateMachine/sleep_state.gd" id="5_yf0c0"]

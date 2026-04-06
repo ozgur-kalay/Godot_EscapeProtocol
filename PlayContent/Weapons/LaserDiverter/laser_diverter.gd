@@ -18,11 +18,13 @@ class_name LaserDiverter
 					"270":
 						child.rotation = deg_to_rad(270)
 
-@onready var infinate_laser_beam: InfiniteLaserBeam = $LaserLine/InfinateLaserBeam
-@onready var infinate_laser_beam_2: InfiniteLaserBeam = $LaserLine/InfinateLaserBeam2
+
 
 var enabled: bool
 
+
+@onready var constant_laser_beam: ConstantLaserBeam = $LaserLine/ConstantLaserBeam
+@onready var constant_laser_beam_2: ConstantLaserBeam = $LaserLine/ConstantLaserBeam2
 @onready var laser_line: Sprite2D = $LaserLine
 var laser_line_default_color: Color
 
@@ -32,18 +34,22 @@ func _ready() -> void:
 	if Engine.is_editor_hint():
 		return
 	laser_line_default_color = laser_line.self_modulate
+	constant_laser_beam.disable()
+	constant_laser_beam_2.disable()
 	
 # ================ Beam 1 ================ 
 func _on_interactable_interaction_started(_interactor: Interactor, _interation_key: int) -> void:
 	if Engine.is_editor_hint():
 		return
-	infinate_laser_beam.enable()
+	#infinate_laser_beam.enable()
+	constant_laser_beam.enable()
 	laser_line.self_modulate.v = 8.0
 
 func _on_interactable_interaction_finished(_interactor: Interactor) -> void:
 	if Engine.is_editor_hint():
 		return
-	infinate_laser_beam.disable()
+	#infinate_laser_beam.disable()
+	constant_laser_beam.disable()
 	laser_line.self_modulate = laser_line_default_color
 
 
@@ -51,12 +57,14 @@ func _on_interactable_interaction_finished(_interactor: Interactor) -> void:
 func _on_interactable_2_interaction_started(_interactor: Interactor, _interation_key: int) -> void:
 	if Engine.is_editor_hint():
 		return
-	infinate_laser_beam_2.enable()
+	#infinate_laser_beam_2.enable()
+	constant_laser_beam_2.enable()
 	laser_line.self_modulate.v = 8.0
 
 
 func _on_interactable_2_interaction_finished(_interactor: Interactor) -> void:
 	if Engine.is_editor_hint():
 		return
-	infinate_laser_beam_2.disable()
+	#infinate_laser_beam_2.disable()
+	constant_laser_beam_2.disable()
 	laser_line.self_modulate = laser_line_default_color

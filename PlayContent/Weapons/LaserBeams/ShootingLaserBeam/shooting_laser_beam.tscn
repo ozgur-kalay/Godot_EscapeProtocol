@@ -1,13 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://b7lew8k074nq6"]
+[gd_scene load_steps=7 format=3 uid="uid://l2dupt5ettgd"]
 
-[ext_resource type="PackedScene" uid="uid://bwda4740lp3mu" path="res://PlayContent/Weapons/LaserBeams/BaseLaserBeam/base_laser_beam.tscn" id="1_cguyp"]
-[ext_resource type="Script" uid="uid://dgh17q2np6uwv" path="res://PlayContent/Weapons/LaserBeams/ShootingLaserBeam/shooting_laser_beam.gd" id="2_wjnku"]
-[ext_resource type="Script" uid="uid://cyedl5yb3h0dm" path="res://Components/AudioGroup/audio_group.gd" id="3_d0fcy"]
-[ext_resource type="AudioStream" uid="uid://nd50tokb5dxe" path="res://Assets/Audio/SoundFx/Laser/sci-fi_weapon_laser_small_03.wav" id="5_wolgn"]
-[ext_resource type="AudioStream" uid="uid://2rdgvln0nwwf" path="res://Assets/Audio/SoundFx/Laser/hum_electric_neon_light_01_SHORT.ogg" id="6_d0fcy"]
-[ext_resource type="AudioStream" uid="uid://dybqcdxv5voog" path="res://Assets/Audio/SoundFx/Laser/TECH WEAPON Gun Shot Zapper 01.wav" id="6_gxm20"]
+[ext_resource type="PackedScene" uid="uid://8vu1n8rqp6x4" path="res://PlayContent/Weapons/LaserBeams/BaseLaserBeam/base_laser_beam.tscn" id="1_pi0eg"]
+[ext_resource type="Script" uid="uid://ccrl37wb3gujl" path="res://PlayContent/Weapons/LaserBeams/ShootingLaserBeam/shooting_laser_beam.gd" id="2_wjnku"]
+[ext_resource type="Script" uid="uid://bsff2bqepps1f" path="res://Decorators/StateMachines/RayCast2DStateMachine/RayCast2DStateMachine.gd" id="3_15ajy"]
+[ext_resource type="Script" uid="uid://bht6f6hjehjfe" path="res://PlayContent/Weapons/LaserBeams/ShootingLaserBeam/StateMachine/off_state.gd" id="4_jiqbf"]
+[ext_resource type="Script" uid="uid://155p62dri5w" path="res://PlayContent/Weapons/LaserBeams/ShootingLaserBeam/StateMachine/shooting_state.gd" id="5_d0fcy"]
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_gxm20"]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wjnku"]
 resource_local_to_scene = true
 particle_flag_disable_z = true
 direction = Vector3(0, 0, 0)
@@ -16,29 +15,20 @@ initial_velocity_max = 150.0
 gravity = Vector3(0, 0, 0)
 color = Color(4.415934, 0, 0, 1)
 
-[node name="ShootingLaserBeam" instance=ExtResource("1_cguyp")]
-process_priority = -1
-light_mask = 0
-collision_mask = 1045
-hit_from_inside = true
+[node name="ShootingLaserBeam" instance=ExtResource("1_pi0eg")]
 script = ExtResource("2_wjnku")
 
 [node name="HitParticles" parent="." index="1"]
-process_material = SubResource("ParticleProcessMaterial_gxm20")
+process_material = SubResource("ParticleProcessMaterial_wjnku")
 
-[node name="ShootSfx" type="Node" parent="." index="2"]
-script = ExtResource("3_d0fcy")
-metadata/_custom_type_script = "uid://cyedl5yb3h0dm"
+[node name="StateMachine" type="Node" parent="." index="3"]
+script = ExtResource("3_15ajy")
+metadata/_custom_type_script = "uid://bsff2bqepps1f"
 
-[node name="TechWeaponGunShotZapper01" type="AudioStreamPlayer" parent="ShootSfx" index="0"]
-stream = ExtResource("6_gxm20")
-volume_db = -5.0
-pitch_scale = 0.76
+[node name="OffState" type="Node" parent="StateMachine" index="0"]
+script = ExtResource("4_jiqbf")
+metadata/_custom_type_script = "uid://bqi8sf74ywdc6"
 
-[node name="SciFiWeaponLaserSmall03" type="AudioStreamPlayer" parent="ShootSfx" index="1"]
-stream = ExtResource("5_wolgn")
-volume_db = -3.0
-pitch_scale = 0.76
-
-[node name="HumElectricNeonLight01Short" type="AudioStreamPlayer" parent="ShootSfx" index="2"]
-stream = ExtResource("6_d0fcy")
+[node name="ShootingState" type="Node" parent="StateMachine" index="1"]
+script = ExtResource("5_d0fcy")
+metadata/_custom_type_script = "uid://bqi8sf74ywdc6"

@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://cmqu5hq2kahns" path="res://Assets/Eye.png" id="1_fsj86"]
 [ext_resource type="Script" uid="uid://cp3v8u25lwwce" path="res://PlayContent/Entities/Enemies/Eye_v1/eye.gd" id="1_tsfui"]
-[ext_resource type="PackedScene" uid="uid://b7lew8k074nq6" path="res://PlayContent/Weapons/LaserBeams/ShootingLaserBeam/shooting_laser_beam.tscn" id="2_gnln6"]
+[ext_resource type="PackedScene" uid="uid://b7lew8k074nq6" path="res://PlayContent/Weapons/LaserBeams_old/ShootingLaserBeam/shooting_laser_beam.tscn" id="2_gnln6"]
 [ext_resource type="Texture2D" uid="uid://c5n7h576evcuo" path="res://icon.svg" id="2_l4k1c"]
 [ext_resource type="PackedScene" uid="uid://sqxgr27o3o80" path="res://Components/Detectors/EntityDetectors/entity_detector.tscn" id="3_fn6fh"]
 [ext_resource type="Texture2D" uid="uid://s78btgvgubl5" path="res://Assets/LightTextures/POV_light_texture.png" id="4_fuh8u"]

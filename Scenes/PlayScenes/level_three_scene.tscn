@@ -14,7 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://daer0ft6je62h" path="res://PlayContent/Interactables/CheckPoint/CheckPoint.tscn" id="6_82m1y"]
 [ext_resource type="PackedScene" uid="uid://c8q1dglunxrl2" path="res://Scenes/Menus/LevelGameCompletedMenu/game_completed_menu.tscn" id="6_sa66b"]
 [ext_resource type="PackedScene" uid="uid://cvd56aoj03erk" path="res://Scenes/Menus/InGameMenu/in_game_menu.tscn" id="7_7qhuc"]
-[ext_resource type="PackedScene" uid="uid://br16a7c1dio2f" path="res://PlayContent/Interactables/DragableBox/dragable_box.tscn" id="7_kjs0f"]
+[ext_resource type="PackedScene" uid="uid://br16a7c1dio2f" path="res://PlayContent/Interactables/DragableBox_old/dragable_box_old.tscn" id="7_kjs0f"]
 [ext_resource type="Environment" uid="uid://m3aa44mkcac2" path="res://Scenes/PlayScenes/level_world_environment.tres" id="8_kjs0f"]
 [ext_resource type="Script" uid="uid://ddqnobiwbq62q" path="res://Scenes/PlayScenes/post_processing.gd" id="9_v66ve"]
 [ext_resource type="PackedScene" uid="uid://rvnj4sdlwouo" path="res://PlayContent/Entities/Enemies/Eye/Eye.tscn" id="11_ah71b"]

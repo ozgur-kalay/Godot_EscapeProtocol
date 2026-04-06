@@ -1,0 +1,42 @@
+[gd_scene load_steps=7 format=3 uid="uid://defdc7471p483"]
+
+[ext_resource type="PackedScene" uid="uid://8vu1n8rqp6x4" path="res://PlayContent/Weapons/LaserBeams/BaseLaserBeam/base_laser_beam.tscn" id="1_ktc6f"]
+[ext_resource type="Script" uid="uid://dybairxak5thh" path="res://PlayContent/Weapons/LaserBeams/ConstantLaserBeam/constant_laser_beam.gd" id="2_fwk2k"]
+[ext_resource type="Script" uid="uid://bsff2bqepps1f" path="res://Decorators/StateMachines/RayCast2DStateMachine/RayCast2DStateMachine.gd" id="3_a1ih2"]
+[ext_resource type="Script" uid="uid://cssdfkrvv3l3k" path="res://PlayContent/Weapons/LaserBeams/ConstantLaserBeam/StateMachine/constant_on_state.gd" id="4_h0n5k"]
+[ext_resource type="Script" uid="uid://mqr3ew4gxdbh" path="res://PlayContent/Weapons/LaserBeams/ConstantLaserBeam/StateMachine/constant_off_state.gd" id="5_1khf8"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_fwk2k"]
+resource_local_to_scene = true
+particle_flag_disable_z = true
+direction = Vector3(0, 0, 0)
+initial_velocity_min = 100.0
+initial_velocity_max = 150.0
+gravity = Vector3(0, 0, 0)
+color = Color(4.415934, 0, 0, 1)
+
+[node name="ConstantLaserBeam" instance=ExtResource("1_ktc6f")]
+collide_with_areas = true
+script = ExtResource("2_fwk2k")
+max_length_x = 0.0
+max_length_y = 10000.0
+
+[node name="HitParticles" parent="." index="1"]
+process_material = SubResource("ParticleProcessMaterial_fwk2k")
+
+[node name="StateMachine" type="Node" parent="." index="2"]
+script = ExtResource("3_a1ih2")
+metadata/_custom_type_script = "uid://bsff2bqepps1f"
+
+[node name="OnState" type="Node" parent="StateMachine" index="0"]
+script = ExtResource("4_h0n5k")
+metadata/_custom_type_script = "uid://bqi8sf74ywdc6"
+
+[node name="OffState" type="Node" parent="StateMachine" index="1"]
+script = ExtResource("5_1khf8")
+metadata/_custom_type_script = "uid://bqi8sf74ywdc6"
+
+[node name="LaserDiverterInteractor" parent="." index="4"]
+enabled = false
+
+[connection signal="interaction_started" from="LaserDiverterInteractor" to="StateMachine/OnState" method="_on_laser_diverter_interactor_interaction_started"]

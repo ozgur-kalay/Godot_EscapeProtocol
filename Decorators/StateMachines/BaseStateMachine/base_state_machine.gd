@@ -28,6 +28,8 @@ enum ProcessOptions{_physics_process, _process}
 @export_group("Disabling")
 @export var _disabling_client_and_signal: Dictionary[Node, StringName]
 
+var initialized: bool
+
 var states: Dictionary
 
 func _ready() -> void:
@@ -45,9 +47,13 @@ func _ready() -> void:
 		await owner.ready
 		initialize()
 		change_state(get_child(entry_state_index).name) # Set the first state node as the entry state
+		initialized = true
 	else:
 		initialize()
 		change_state(get_child(entry_state_index).name) # Set the first state node as the entry state
+		initialized = true
+		
+	
 
 func _physics_process(delta: float) -> void:
 	if !enabled:

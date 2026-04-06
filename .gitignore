@@ -2,4 +2,7 @@
 Build/
 .godot/
 .import/
+*.exe
+*.console
+*.pck
 export_presets.cfg

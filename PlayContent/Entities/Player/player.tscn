@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://bkqaslclk8enh"]
+[gd_scene load_steps=50 format=3 uid="uid://bkqaslclk8enh"]
 
 [ext_resource type="Script" uid="uid://bq6rth4krrp1j" path="res://PlayContent/Entities/Player/player.gd" id="1_mv1ah"]
 [ext_resource type="Texture2D" uid="uid://tbp0sq65kakh" path="res://Assets/Aseprite/Player/player-Sheet.png" id="2_m6tet"]
@@ -27,6 +27,7 @@
 [ext_resource type="Script" uid="uid://dquqf55682frj" path="res://PlayContent/Entities/Player/StateMachine/grab_substates/pull_up_substate.gd" id="14_xrm3c"]
 [ext_resource type="Script" uid="uid://barh3qs6jok2x" path="res://PlayContent/Entities/Player/StateMachine/grab_substates/pull_down_substate.gd" id="15_mxr7v"]
 [ext_resource type="Script" uid="uid://fv48nu8frvw6" path="res://Components/PitchRandomizers/pitch_randomizer_single.gd" id="19_0gt7d"]
+[ext_resource type="PackedScene" uid="uid://d1deajq2fl7fi" path="res://Components/DragingComponent/draging_component.tscn" id="28_l7hj4"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xrm3c"]
 radius = 6.0
@@ -323,6 +324,9 @@ _data = {
 &"invisibility": SubResource("Animation_0gt7d")
 }
 
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_l7hj4"]
+b = Vector2(3, 0)
+
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
 script = ExtResource("1_mv1ah")
@@ -552,6 +556,12 @@ metadata/_custom_type_script = "uid://cse2kmjoacby8"
 [node name="PullDownSubState" type="Node" parent="Controllers/StateMachine/GrabState/GrabSubStateMachine"]
 script = ExtResource("15_mxr7v")
 metadata/_custom_type_script = "uid://cse2kmjoacby8"
+
+[node name="DragingComponent" parent="." instance=ExtResource("28_l7hj4")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DragingComponent"]
+position = Vector2(6, 0)
+shape = SubResource("SegmentShape2D_l7hj4")
 
 [connection signal="health_finished" from="HurtBox" to="." method="_on_hurt_box_health_finished"]
 [connection signal="health_finished" from="HurtBox" to="Controllers/StateMachine/GrabState" method="_on_hurt_box_health_finished"]

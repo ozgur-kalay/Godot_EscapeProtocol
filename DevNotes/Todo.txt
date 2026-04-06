@@ -3,3 +3,7 @@
 - INTERACTABLE AND INTERACTOR HIS HIGHLY BROKEN AFTER AreaSHape Entered implementation. FIX THIS!!!!!!
 
 - Build a proper player detectablity system.
+
+- Players Laser Shooter is a HELMET!
+
+- Rebuild Laser Diverter

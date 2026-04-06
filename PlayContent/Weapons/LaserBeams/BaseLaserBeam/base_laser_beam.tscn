@@ -1,26 +1,64 @@
-[gd_scene load_steps=3 format=3 uid="uid://bwda4740lp3mu"]
+[gd_scene load_steps=8 format=3 uid="uid://8vu1n8rqp6x4"]
 
-[ext_resource type="Script" uid="uid://t71raddka6nc" path="res://PlayContent/Weapons/LaserBeams/BaseLaserBeam/base_laser_beam.gd" id="1_etxb3"]
-[ext_resource type="Material" uid="uid://chsjh7bwh04tn" path="res://PlayContent/Weapons/LaserBeam/laser_beam_hit_particles.tres" id="2_q4q5s"]
+[ext_resource type="Script" uid="uid://v05k6hobvxu5" path="res://Components/DrawOrderComponent/z_index_component.gd" id="1_6piyp"]
+[ext_resource type="Script" uid="uid://chkcbxlx67vme" path="res://PlayContent/Weapons/LaserBeams/BaseLaserBeam/base_laser_beam.gd" id="1_etxb3"]
+[ext_resource type="Script" uid="uid://bbqfuin52givy" path="res://Components/Hit-Hurt_Boxes/hit_box.gd" id="3_wlbhc"]
+[ext_resource type="Script" uid="uid://jycccgl78yj3" path="res://Components/InteractionSystem/Interactor/interactor.gd" id="4_p3btx"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_q4q5s"]
+resource_local_to_scene = true
+particle_flag_disable_z = true
+direction = Vector3(0, 0, 0)
+initial_velocity_min = 100.0
+initial_velocity_max = 150.0
+gravity = Vector3(0, 0, 0)
+color = Color(4.415934, 0, 0, 1)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_wlbhc"]
+b = Vector2(0, 16)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_p3btx"]
 
 [node name="BaseLaserBeam" type="RayCast2D" groups=["scene_reset"]]
-collision_mask = 1029
-collide_with_areas = true
+collision_mask = 8196
 script = ExtResource("1_etxb3")
 
 [node name="Line2D" type="Line2D" parent="."]
-light_mask = 0
+modulate = Color(10.5787325, 0, 0, 1)
 points = PackedVector2Array(0, 0, 0, 0)
-width = 2.0
-default_color = Color(5.1105056, 0, 0, 1)
+width = 1.8
 
 [node name="HitParticles" type="GPUParticles2D" parent="."]
-z_index = 10
-z_as_relative = false
+rotation = -1.5707964
 amount = 15
 lifetime = 0.05
 explosiveness = 0.2
 randomness = 0.2
 trail_enabled = true
 trail_lifetime = 0.34
-process_material = ExtResource("2_q4q5s")
+process_material = SubResource("ParticleProcessMaterial_q4q5s")
+
+[node name="ZIndexModifierComponent" type="Node" parent="HitParticles"]
+script = ExtResource("1_6piyp")
+z_index = 4
+metadata/_custom_type_script = "uid://v05k6hobvxu5"
+
+[node name="HitBox" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 4
+script = ExtResource("3_wlbhc")
+metadata/_custom_type_script = "uid://bbqfuin52givy"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+shape = SubResource("SegmentShape2D_wlbhc")
+debug_color = Color(0, 0.4, 0, 0.4)
+
+[node name="LaserDiverterInteractor" type="Area2D" parent="."]
+collision_layer = 128
+collision_mask = 64
+script = ExtResource("4_p3btx")
+interaction_keys = Array[int]([6])
+metadata/_custom_type_script = "uid://jycccgl78yj3"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LaserDiverterInteractor"]
+shape = SubResource("SegmentShape2D_p3btx")
